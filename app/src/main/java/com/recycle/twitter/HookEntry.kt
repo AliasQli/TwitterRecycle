@@ -1,0 +1,49 @@
+package com.recycle.twitter
+
+import com.highcapable.yukihookapi.YukiHookAPI
+import com.highcapable.yukihookapi.annotation.xposed.InjectYukiHookWithXposed
+import com.highcapable.yukihookapi.hook.log.YLog
+import com.highcapable.yukihookapi.hook.xposed.proxy.IYukiHookXposedInit
+import com.tencent.mmkv.MMKV
+
+@InjectYukiHookWithXposed
+object HookEntry : IYukiHookXposedInit {
+    override fun onInit() {
+        YukiHookAPI.configs {
+            debugLog {
+                tag = "TwitterRecycle"
+                isEnable = true
+                isRecord = false
+                elements(TAG, PRIORITY, PACKAGE_NAME, USER_ID)
+            }
+            isDebug = false
+            isEnableModuleAppResourcesCache = true
+            isEnableHookSharedPreferences = false
+            isEnableDataChannel = true
+        }
+    }
+
+    override fun onHook() {
+        YukiHookAPI.encase {
+            loadApp {
+                if (packageName.startsWith("com.google")) return@loadApp
+
+                onAppLifecycle {
+                    attachBaseContext { baseContext, _ ->
+                        YLog.debug(baseContext.dataDir.absolutePath)
+                        MMKV.initialize(baseContext)
+                        HookData.init()
+                    }
+                }
+
+                val hooks = arrayListOf(
+                    JsonHook,
+                )
+
+                hooks.forEach { hook ->
+                    hook.init(this)
+                }
+            }
+        }
+    }
+}

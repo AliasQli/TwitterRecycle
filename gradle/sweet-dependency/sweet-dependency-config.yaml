@@ -1,0 +1,37 @@
+repositories:
+  gradle-plugin-portal:
+    scope: PLUGINS
+  google:
+  maven-central:
+  jit-pack:
+  sonatype-oss-releases:
+  rovo89-xposed-api:
+    scope: LIBRARIES
+    url: https://api.xposed.info/
+    content:
+      include:
+        group:
+          de.robv.android.xposed
+
+plugins:
+  com.android.application:
+    alias: android-application
+    version: 8.1.2
+  org.jetbrains.kotlin.android:
+    alias: kotlin-android
+    version: 2.0.0
+  com.google.devtools.ksp:
+    alias: kotlin-ksp
+    version: 2.0.0-1.0.22
+
+libraries:
+  de.robv.android.xposed:
+    api:
+      version: 82
+      repositories:
+        rovo89-xposed-api
+  com.highcapable.yukihookapi:
+    api:
+      version: 1.2.1
+    ksp-xposed:
+      version-ref: <this>::api
