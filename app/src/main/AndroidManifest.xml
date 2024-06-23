@@ -18,6 +18,11 @@
     android:supportsRtl="true"
     android:theme="@style/Theme.TwitterRecycle">
 
+    <activity
+        android:name=".ui.MainActivity"
+        android:exported="true"
+        android:screenOrientation="behind" />
+
     <!-- 设置为 Xposed 模块 -->
     <meta-data
         android:name="xposedmodule"
@@ -26,7 +31,7 @@
     <!-- 设置你的模块描述 -->
     <meta-data
         android:name="xposeddescription"
-        android:value="Recycle Twitter Waste." />
+        android:value="Recycle Twitter Waste. Long press main page X logo to open module settings." />
 
     <!-- 最低 Xposed 版本号 -->
     <meta-data

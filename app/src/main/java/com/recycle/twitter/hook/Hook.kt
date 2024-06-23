@@ -1,4 +1,4 @@
-package com.recycle.twitter
+package com.recycle.twitter.hook
 
 import com.highcapable.yukihookapi.hook.param.PackageParam
 
