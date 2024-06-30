@@ -25,17 +25,17 @@ import java.io.InputStream
 /**
  * Hook JSON creation.
  */
-object JsonHook : Hook() {
-
-    private const val timelineInstructionsAt = "data.timeline_response.timeline.instructions"
-    private const val userInstructionsAt = "data.user.timeline_response.timeline.instructions"
-    private const val timelineInstructionsFilter =
+class JsonHook(val data: Data) : Hook() {
+    private val timelineInstructionsAt = "data.timeline_response.timeline.instructions"
+    private val userInstructionsAt = "data.user.timeline_response.timeline.instructions"
+    private val timelineInstructionsFilter =
         "{\"data\":{\"timeline_response\":{\"timeline\":{\"instructions\":["
-    private const val userInstructionsFilter = "{\"data\":{\"user\":{\"timeline_response\":"
+    private val userInstructionsFilter = "{\"data\":{\"user\":{\"timeline_response\":"
+
     private fun JSONObject.timelineEntryNeedRetain(): Boolean {
         val entryId = optString("entryId")
 
-        if (entryId.startsWith("tweet-") && Data.Prefs.blockRetweets) {
+        if (entryId.startsWith("tweet-") && data.prefs.blockRetweets) {
             optJSONObject("content")
                 ?.checkTypename("TimelineTimelineItem")?.optJSONObject("content")
                 ?.checkTypename("TimelineTweet")?.intoJSONObject("tweetResult.result")
@@ -43,7 +43,7 @@ object JsonHook : Hook() {
                 ?.checkTypename("Tweet")?.intoJSONObject("core.user_result.result")
                 ?.checkTypename("User")?.apply {
                     val restId = optString("rest_id")
-                    val followed = Data.persistentUsers.contains(restId)
+                    val followed = data.persistentUsers.contains(restId)
 
                     val legacy = optJSONObject("legacy")
                     val screenName = legacy?.optString("screen_name")
@@ -55,13 +55,14 @@ object JsonHook : Hook() {
                     }
                     return !followed
                 }
-        } else if (entryId.startsWith("promoted-tweet-") && Data.Prefs.disablePromotedTweets) {
-            YLog.debug("Filtered promoted tweet")
-            return false
-        } else if (entryId.startsWith("who-to-follow-") && Data.Prefs.disableWhoToFollow) {
-            YLog.debug("Filtered who to follow")
-            return false
         }
+//            else if (entryId.startsWith("promoted-tweet-") && data.prefs.disablePromotedTweets) {
+//                YLog.debug("Filtered promoted tweet")
+//                return false
+//            } else if (entryId.startsWith("who-to-follow-") && data.prefs.disableWhoToFollow) {
+//                YLog.debug("Filtered who to follow")
+//                return false
+//            }
         return true
     }
 
@@ -79,37 +80,61 @@ object JsonHook : Hook() {
         var isTerminate = false
 
         userInstructions.forEach { instruction ->
-            if (instruction.hasTypename("TimelineAddEntries")) {
+            if (instruction.hasTypename("TimelineTerminateTimeline")) {
+                when (instruction.optString("direction")) {
+                    "Top" -> {
+                        data.volatileUsers = mutableSetOf()
+                        YLog.info("User timeline start")
+                    }
+
+                    "Bottom" -> isTerminate = true
+                }
+            } else if (instruction.hasTypename("TimelineAddEntries")) {
                 var n = 0
                 instruction.optJSONArray("entries")?.forEach { entry ->
                     val entryId = entry.optString("entryId")
                     if (entryId.startsWith("user-")) {
                         val restId = entryId.split("-")[1]
-                        Data.volatileUsers.add(restId)
-                        Data.persistentUsers.add(restId)
+                        data.volatileUsers.add(restId)
+                        data.persistentUsers.add(restId)
                         n++
                     }
                 }
                 YLog.info("Got $n users")
-            } else if (instruction.hasTypename("TimelineTerminateTimeline")) {
-                if (instruction.optString("direction").equals("Bottom")) {
-                    isTerminate = true
-                }
             }
         }
 
         if (isTerminate) {
-            Data.persistentUsers = Data.volatileUsers
-            Data.volatileUsers = mutableSetOf()
+            data.persistentUsers = data.volatileUsers
+            data.volatileUsers = mutableSetOf()
 
-            YLog.info("User timeline termination: following ${Data.persistentUsers.size} users")
+            YLog.info("User timeline termination: following ${data.persistentUsers.size} users")
             val b = StringBuilder()
-            Data.persistentUsers.forEach {
+            data.persistentUsers.forEach {
                 b.append(it).append(",")
             }
             YLog.debug(b.toString())
         }
-        Data.flushPersistentUsers()
+        data.flushPersistentUsers()
+    }
+
+    private fun processUserFollowResponse(json: JSONObject) {
+        val id = json.getString("id_str")
+        val following = json.getBoolean("following")
+        val screenName = json.optString("screen_name")
+        val name = json.optString("name")
+
+        if (!following) { // it is reversed (when following a user they're not followed yet, vice versa)
+            data.volatileUsers.add(id) // if following from user list
+            data.persistentUsers.add(id)
+            YLog.info("Followed user $name@$screenName#$id")
+        } else {
+            data.volatileUsers.remove(id)
+            data.persistentUsers.remove(id)
+            YLog.info("Unfollowed user $name@$screenName#$id")
+        }
+
+        data.flushPersistentUsers()
     }
 
     private fun processJson(json: JSONObject) {
@@ -129,6 +154,10 @@ object JsonHook : Hook() {
 
             processUserInstructions(userInstructions)
             return
+        }
+
+        if (json.has("id_str") && json.has("name") && json.has("screen_name") && json.has("following")) {
+            processUserFollowResponse(json)
         }
     }
 
@@ -162,6 +191,7 @@ object JsonHook : Hook() {
                 if (content.startsWith(timelineInstructionsFilter) || content.startsWith(
                         userInstructionsFilter
                     )
+                    || content.startsWith("{\"id\":")
                 ) {
                     try {
                         val json = JSONObject(content)

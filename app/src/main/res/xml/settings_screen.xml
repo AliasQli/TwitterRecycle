@@ -9,21 +9,27 @@
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:defaultValue="true"
-            android:title="Block retweets from followed user"
-            app:key="block_retweets" />
+            android:defaultValue="@bool/block_retweets_def"
+            android:title="Block retweets from followed users"
+            app:key="@string/block_retweets" />
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:defaultValue="true"
+            android:defaultValue="@bool/disable_promoted_tweets_def"
             android:title="Disable promoted tweets"
             app:key="disable_promoted_tweets" />
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:defaultValue="true"
+            android:defaultValue="@bool/disable_who_to_follow_def"
             android:title="Disable who to follow"
             app:key="disable_who_to_follow" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="@bool/disable_media_warning_def"
+            android:title="Disable media warning"
+            app:key="@string/disable_media_warning" />
     </PreferenceCategory>
     <PreferenceCategory
         android:layout_width="wrap_content"
@@ -33,13 +39,13 @@
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:defaultValue="true"
+            android:defaultValue="@bool/following_mark_def"
             android:title="Enabled"
             app:key="following_mark" />
         <EditTextPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:defaultValue="📎"
+            android:defaultValue="@string/following_mark_prefix_def"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:title="Set mark prefix"

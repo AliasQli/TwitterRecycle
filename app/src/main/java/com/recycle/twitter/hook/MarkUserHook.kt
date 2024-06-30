@@ -11,8 +11,10 @@ import com.recycle.twitter.data.Data
 /**
  * Mark followed users
  */
-object UserHook : Hook() {
+class MarkUserHook(val data: Data) : Hook() {
     override fun PackageParam.load() {
+        if (!data.prefs.followingMark) return
+
         val legacyUserClassName =
             "com.twitter.api.model.json.core.GraphqlJsonTwitterUser\$JsonGraphQlLegacyTwitterUser"
         val legacyUserClass = legacyUserClassName.toClass()
@@ -22,8 +24,6 @@ object UserHook : Hook() {
             name = "parse"
         }.hook {
             after {
-                if (!Data.Prefs.followingMarkEnabled) return@after
-
                 val id = legacyUserClass.field {
                     type = LongType
                     superClass()
@@ -31,13 +31,13 @@ object UserHook : Hook() {
 
                 if (id == 0L) return@after
 
-                if (Data.persistentUsers.contains(id.toString())) {
+                if (data.persistentUsers.contains(id.toString())) {
                     legacyUserClass.field {
                         type = StringClass
                         order()
                         superClass()
                     }.get(result).apply {
-                        set(Data.Prefs.followingMarkPrefix + string())
+                        set("${data.prefs.followingMarkPrefix}${string()}")
                         YLog.debug("Marked user ${string()}#$id")
                     }
                 }

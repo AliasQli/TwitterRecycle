@@ -7,9 +7,11 @@ import com.highcapable.yukihookapi.hook.factory.registerModuleAppActivities
 import com.highcapable.yukihookapi.hook.xposed.proxy.IYukiHookXposedInit
 import com.recycle.twitter.data.Data
 import com.recycle.twitter.hook.JsonHook
+import com.recycle.twitter.hook.JsonTimelineTweetHook
+import com.recycle.twitter.hook.JsonTimelineUserHook
+import com.recycle.twitter.hook.MarkUserHook
+import com.recycle.twitter.hook.SensitiveMediaHook
 import com.recycle.twitter.hook.SettingsHook
-import com.recycle.twitter.hook.UserHook
-import com.tencent.mmkv.MMKV
 
 @InjectYukiHookWithXposed
 object HookEntry : IYukiHookXposedInit {
@@ -34,22 +36,27 @@ object HookEntry : IYukiHookXposedInit {
                 if (packageName.startsWith("com.google") || packageName == BuildConfig.APPLICATION_ID) return@loadApp
 
                 onAppLifecycle {
-                    onCreate {
-                        injectModuleAppResources()
-                        registerModuleAppActivities()
-                        MMKV.initialize(this)
-                        Data.init(this)
+                    attachBaseContext { baseContext, hasCalledSuper ->
+                        if (hasCalledSuper) return@attachBaseContext
+                        baseContext.apply {
+                            injectModuleAppResources()
+                            registerModuleAppActivities()
+                            val data = Data(this)
+
+                            val hooks = arrayListOf(
+                                ::JsonHook,
+                                ::MarkUserHook,
+                                ::JsonTimelineUserHook,
+                                ::JsonTimelineTweetHook,
+                                ::SensitiveMediaHook,
+                                ::SettingsHook,
+                            )
+
+                            hooks.forEach { hook ->
+                                hook(data).init(this@loadApp)
+                            }
+                        }
                     }
-                }
-
-                val hooks = arrayListOf(
-                    JsonHook,
-                    UserHook,
-                    SettingsHook,
-                )
-
-                hooks.forEach { hook ->
-                    hook.init(this)
                 }
             }
         }

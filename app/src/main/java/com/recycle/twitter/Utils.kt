@@ -1,5 +1,7 @@
 package com.recycle.twitter
 
+import android.annotation.SuppressLint
+import android.content.Context
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -47,3 +49,10 @@ fun JSONObject.checkTypename(name: String): JSONObject? =
     } else {
         null
     }
+
+@SuppressLint("DiscouragedApi")
+fun Context.getId(name: String, defType: String): Int {
+    return resources.getIdentifier(
+        name, defType, packageName
+    )
+}

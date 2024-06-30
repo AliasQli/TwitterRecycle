@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="persistent_users_key">following_users</string>
+
+    <string name="block_retweets">block_retweets</string>
+    <bool name="block_retweets_def">true</bool>
+
+    <string name="disable_promoted_tweets">disable_promoted_tweets</string>
+    <bool name="disable_promoted_tweets_def">true</bool>
+
+    <string name="disable_who_to_follow">disable_who_to_follow</string>
+    <bool name="disable_who_to_follow_def">true</bool>
+
+    <string name="disable_media_warning">disable_media_warning</string>
+    <bool name="disable_media_warning_def">true</bool>
+
+    <string name="following_mark">following_mark</string>
+    <bool name="following_mark_def">true</bool>
+
+    <string name="following_mark_prefix">following_mark_prefix</string>
+    <string name="following_mark_prefix_def">📎</string>
+</resources>

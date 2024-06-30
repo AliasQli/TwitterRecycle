@@ -1,70 +1,41 @@
 package com.recycle.twitter.data
 
-import com.highcapable.yukihookapi.hook.type.java.BooleanClass
-import com.highcapable.yukihookapi.hook.type.java.StringClass
-import com.highcapable.yukihookapi.hook.xposed.prefs.YukiHookPrefsBridge
+import android.content.Context
+import com.highcapable.yukihookapi.hook.factory.prefs
+import com.highcapable.yukihookapi.hook.xposed.prefs.data.PrefsData
+import com.recycle.twitter.R
 
-const val BlockRetweetsKey = "block_retweets"
-const val DisablePromotedTweetsKey = "disable_promoted_tweets"
-const val DisableWhoToFollowKey = "disable_who_to_follow"
-const val FollowingMarkKey = "following_mark"
-const val FollowingMarkPrefixKey = "following_mark_prefix"
+class Prefs(context: Context) {
+    private val prefs = context.prefs().native()
+    private val itemBlockRetweets = PrefsData(
+        context.getString(R.string.block_retweets),
+        context.resources.getBoolean(R.bool.block_retweets_def)
+    )
+    private val itemDisablePromotedTweets = PrefsData(
+        context.getString(R.string.disable_promoted_tweets),
+        context.resources.getBoolean(R.bool.disable_promoted_tweets_def)
+    )
+    private val itemDisableWhoToFollow = PrefsData(
+        context.getString(R.string.disable_who_to_follow),
+        context.resources.getBoolean(R.bool.disable_who_to_follow_def)
+    )
+    private val itemDisableMediaWarning = PrefsData(
+        context.getString(R.string.disable_media_warning),
+        context.resources.getBoolean(R.bool.disable_media_warning_def)
+    )
+    private val itemFollowingMark = PrefsData(
+        context.getString(R.string.following_mark),
+        context.resources.getBoolean(R.bool.following_mark_def)
+    )
+    private val itemFollowingMarkPrefix = PrefsData(
+        context.getString(R.string.following_mark_prefix),
+        context.resources.getString(R.string.following_mark_prefix_def)
+    )
 
-class Prefs(private val prefs: YukiHookPrefsBridge) {
-    companion object {
-        fun type(key: String): Class<*> {
-            return when (key) {
-                FollowingMarkPrefixKey -> StringClass
-                BlockRetweetsKey, DisablePromotedTweetsKey,
-                DisableWhoToFollowKey, FollowingMarkKey -> BooleanClass
-
-                else -> throw Error("Unexpected key $key")
-            }
-        }
-
-        fun defaultString(key: String): String {
-            return when (key) {
-                FollowingMarkPrefixKey -> "\uD83D\uDCCE"
-                else -> throw Error("Unexpected string key $key")
-            }
-        }
-
-        fun defaultBool(key: String): Boolean {
-            return when (key) {
-                BlockRetweetsKey, DisablePromotedTweetsKey,
-                DisableWhoToFollowKey, FollowingMarkKey -> true
-
-                else -> throw Error("Unexpected bool key $key")
-            }
-        }
-    }
-
-    val blockRetweets get() = prefs.getBoolean(BlockRetweetsKey, defaultBool(BlockRetweetsKey))
-    val disablePromotedTweets
-        get() = prefs.getBoolean(
-            DisablePromotedTweetsKey, defaultBool(
-                DisablePromotedTweetsKey
-            )
-        )
-    val disableWhoToFollow
-        get() = prefs.getBoolean(
-            DisableWhoToFollowKey, defaultBool(
-                DisableWhoToFollowKey
-            )
-        )
-    val followingMarkEnabled
-        get() = prefs.getBoolean(
-            FollowingMarkKey,
-            defaultBool(FollowingMarkKey)
-        )
-    val followingMarkPrefix
-        get() = prefs.getString(
-            FollowingMarkPrefixKey, defaultString(
-                FollowingMarkPrefixKey
-            )
-        )
-
-    override fun toString(): String {
-        return "Pref: ${blockRetweets}, ${disablePromotedTweets}, ${disableWhoToFollow}, ${followingMarkEnabled}, $followingMarkPrefix"
-    }
+    val blockRetweets = prefs.get(itemBlockRetweets)
+    val disablePromotedTweets = prefs.get(itemDisablePromotedTweets)
+    val disableWhoToFollow = prefs.get(itemDisableWhoToFollow)
+    val disableMediaWarning = prefs.get(itemDisableMediaWarning)
+    val followingMark = prefs.get(itemFollowingMark)
+    val followingMarkPrefix = prefs.get(itemFollowingMarkPrefix)
 }
