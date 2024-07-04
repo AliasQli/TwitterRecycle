@@ -4,14 +4,13 @@ import com.highcapable.yukihookapi.hook.factory.field
 import com.highcapable.yukihookapi.hook.factory.method
 import com.highcapable.yukihookapi.hook.log.YLog
 import com.highcapable.yukihookapi.hook.param.PackageParam
-import com.recycle.twitter.data.Data
+import com.recycle.twitter.data.data
 
 /**
  * Disable "who to follow"
  */
-class JsonTimelineUserHook(val data: Data) : Hook() {
+object JsonTimelineUserHook : Hook() {
     override fun PackageParam.load() {
-
         val jsonTimelineUserClass = "com.twitter.model.json.timeline.urt.JsonTimelineUser".toClass()
         val jsonTimelineUserMapperClass =
             "com.twitter.model.json.timeline.urt.JsonTimelineUser\$\$JsonObjectMapper".toClass()

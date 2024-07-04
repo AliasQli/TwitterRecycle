@@ -19,7 +19,7 @@
     android:theme="@style/Theme.TwitterRecycle">
 
     <activity
-        android:name=".ui.MainActivity"
+        android:name=".ui.SettingsActivity"
         android:exported="true"
         android:screenOrientation="behind" />
 

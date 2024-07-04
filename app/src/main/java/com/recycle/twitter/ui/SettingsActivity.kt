@@ -1,30 +1,31 @@
 package com.recycle.twitter.ui
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.PreferenceManager
 import com.highcapable.yukihookapi.hook.xposed.parasitic.activity.base.ModuleAppCompatActivity
 import com.recycle.twitter.R
+import com.recycle.twitter.data.data
 
-class MainActivity : ModuleAppCompatActivity() {
+class SettingsActivity : ModuleAppCompatActivity() {
     override val moduleTheme: Int
         get() = R.style.Theme_TwitterRecycle
 
-    class MFragment : PreferenceFragmentCompat()
-//        , SharedPreferences.OnSharedPreferenceChangeListener
-    {
+    class MFragment : PreferenceFragmentCompat(),
+        SharedPreferences.OnSharedPreferenceChangeListener {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-//            PreferenceManager.getDefaultSharedPreferences(requireActivity())
-//                .registerOnSharedPreferenceChangeListener(this)
+            PreferenceManager.getDefaultSharedPreferences(requireActivity())
+                .registerOnSharedPreferenceChangeListener(this)
             setPreferencesFromResource(R.xml.settings_screen, rootKey)
         }
 
-//        override fun onSharedPreferenceChanged(
-//            sharedPreferences: SharedPreferences?,
-//            key: String?
-//        ) {
-//            val ctx = context ?: return
-////            YLog.debug(Prefs(ctx, ctx.prefs().native()).toString())
-//        }
+        override fun onSharedPreferenceChanged(
+            sharedPreferences: SharedPreferences?,
+            key: String?
+        ) {
+            data.prefs.refresh()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -6,6 +6,7 @@ import com.highcapable.yukihookapi.hook.factory.injectModuleAppResources
 import com.highcapable.yukihookapi.hook.factory.registerModuleAppActivities
 import com.highcapable.yukihookapi.hook.xposed.proxy.IYukiHookXposedInit
 import com.recycle.twitter.data.Data
+import com.recycle.twitter.data.data
 import com.recycle.twitter.hook.JsonHook
 import com.recycle.twitter.hook.JsonTimelineTweetHook
 import com.recycle.twitter.hook.JsonTimelineUserHook
@@ -41,19 +42,19 @@ object HookEntry : IYukiHookXposedInit {
                         baseContext.apply {
                             injectModuleAppResources()
                             registerModuleAppActivities()
-                            val data = Data(this)
+                            data = Data(this)
 
                             val hooks = arrayListOf(
-                                ::JsonHook,
-                                ::MarkUserHook,
-                                ::JsonTimelineUserHook,
-                                ::JsonTimelineTweetHook,
-                                ::SensitiveMediaHook,
-                                ::SettingsHook,
+                                JsonHook,
+                                MarkUserHook,
+                                JsonTimelineUserHook,
+                                JsonTimelineTweetHook,
+                                SensitiveMediaHook,
+                                SettingsHook,
                             )
 
                             hooks.forEach { hook ->
-                                hook(data).init(this@loadApp)
+                                hook.init(this@loadApp)
                             }
                         }
                     }

@@ -9,12 +9,13 @@ import com.highcapable.yukihookapi.hook.log.YLog
 import com.highcapable.yukihookapi.hook.param.PackageParam
 import com.highcapable.yukihookapi.hook.type.java.InputStreamClass
 import com.recycle.twitter.checkTypename
-import com.recycle.twitter.data.Data
+import com.recycle.twitter.data.data
 import com.recycle.twitter.filter
 import com.recycle.twitter.forEach
 import com.recycle.twitter.hasTypename
 import com.recycle.twitter.intoJSONArray
 import com.recycle.twitter.intoJSONObject
+import com.recycle.twitter.typename
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -29,12 +30,12 @@ import java.io.InputStream
  * - Handle (un)follow actions
  * - Filter retweets from followed users
  */
-class JsonHook(val data: Data) : Hook() {
-    private val timelineInstructionsAt = "data.timeline_response.timeline.instructions"
-    private val userInstructionsAt = "data.user.timeline_response.timeline.instructions"
-    private val timelineInstructionsFilter =
+object JsonHook : Hook() {
+    private const val timelineInstructionsAt = "data.timeline_response.timeline.instructions"
+    private const val userInstructionsAt = "data.user.timeline_response.timeline.instructions"
+    private const val timelineInstructionsFilter =
         "{\"data\":{\"timeline_response\":{\"timeline\":{\"instructions\":["
-    private val userInstructionsFilter = "{\"data\":{\"user\":{\"timeline_response\":"
+    private const val userInstructionsFilter = "{\"data\":{\"user\":{\"timeline_response\":"
 
     private fun JSONObject.timelineEntryNeedRetain(): Boolean {
         val entryId = optString("entryId")
@@ -84,27 +85,31 @@ class JsonHook(val data: Data) : Hook() {
         var isTerminate = false
 
         userInstructions.forEach { instruction ->
-            if (instruction.hasTypename("TimelineTerminateTimeline")) {
-                when (instruction.optString("direction")) {
-                    "Top" -> {
-                        data.volatileUsers = mutableSetOf()
-                        YLog.info("User timeline start")
-                    }
+            when (instruction.typename) {
+                "TimelineTerminateTimeline" -> {
+                    when (instruction.optString("direction")) {
+                        "Top" -> {
+                            data.volatileUsers = mutableSetOf()
+                            YLog.info("User timeline start")
+                        }
 
-                    "Bottom" -> isTerminate = true
-                }
-            } else if (instruction.hasTypename("TimelineAddEntries")) {
-                var n = 0
-                instruction.optJSONArray("entries")?.forEach { entry ->
-                    val entryId = entry.optString("entryId")
-                    if (entryId.startsWith("user-")) {
-                        val restId = entryId.split("-")[1]
-                        data.volatileUsers.add(restId)
-                        data.persistentUsers.add(restId)
-                        n++
+                        "Bottom" -> isTerminate = true
                     }
                 }
-                YLog.info("Got $n users")
+
+                "TimelineAddEntries" -> {
+                    var n = 0
+                    instruction.optJSONArray("entries")?.forEach { entry ->
+                        val entryId = entry.optString("entryId")
+                        if (entryId.startsWith("user-")) {
+                            val restId = entryId.split("-")[1]
+                            data.volatileUsers.add(restId)
+                            data.persistentUsers.add(restId)
+                            n++
+                        }
+                    }
+                    YLog.info("Got $n users")
+                }
             }
         }
 

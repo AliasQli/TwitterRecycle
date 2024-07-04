@@ -4,14 +4,13 @@ import com.highcapable.yukihookapi.hook.factory.field
 import com.highcapable.yukihookapi.hook.factory.method
 import com.highcapable.yukihookapi.hook.param.PackageParam
 import com.highcapable.yukihookapi.hook.type.java.BooleanType
-import com.recycle.twitter.data.Data
+import com.recycle.twitter.data.data
 
 /**
  * Make media insensitive
  */
-class SensitiveMediaHook(val data: Data) : Hook() {
+object SensitiveMediaHook : Hook() {
     override fun PackageParam.load() {
-
         val jsonSensitiveMediaWarningClass =
             "com.twitter.model.json.core.JsonSensitiveMediaWarning".toClass()
         val jsonSensitiveMediaWarningMapperClass =

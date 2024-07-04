@@ -3,9 +3,10 @@ package com.recycle.twitter.data
 import android.content.Context
 import com.recycle.twitter.BuildConfig
 import com.recycle.twitter.R
+import com.recycle.twitter.getId
 import com.tencent.mmkv.MMKV
 
-class Data(var context: Context) {
+class Data(context: Context) {
     init {
         MMKV.initialize(context)
     }
@@ -15,8 +16,11 @@ class Data(var context: Context) {
     var volatileUsers = mutableSetOf<String>()
     var persistentUsers: MutableSet<String> = kv.getStringSet(persistentUsersKey, mutableSetOf())!!
     var prefs = Prefs(context)
+    val getId = context::getId
 
     fun flushPersistentUsers() {
         kv.putStringSet(persistentUsersKey, persistentUsers)
     }
 }
+
+lateinit var data: Data
