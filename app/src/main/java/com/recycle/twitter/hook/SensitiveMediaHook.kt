@@ -6,9 +6,11 @@ import com.highcapable.yukihookapi.hook.param.PackageParam
 import com.highcapable.yukihookapi.hook.type.java.BooleanType
 import com.recycle.twitter.data.Data
 
+/**
+ * Make media insensitive
+ */
 class SensitiveMediaHook(val data: Data) : Hook() {
     override fun PackageParam.load() {
-        if (!data.prefs.disableMediaWarning) return
 
         val jsonSensitiveMediaWarningClass =
             "com.twitter.model.json.core.JsonSensitiveMediaWarning".toClass()
@@ -19,6 +21,8 @@ class SensitiveMediaHook(val data: Data) : Hook() {
             name = "parse"
         }.hook {
             after {
+                if (!data.prefs.disableMediaWarning) return@after
+
                 result ?: return@after
                 jsonSensitiveMediaWarningClass.field {
                     type = BooleanType

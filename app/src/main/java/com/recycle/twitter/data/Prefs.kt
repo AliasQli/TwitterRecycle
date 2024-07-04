@@ -32,10 +32,10 @@ class Prefs(context: Context) {
         context.resources.getString(R.string.following_mark_prefix_def)
     )
 
-    val blockRetweets = prefs.get(itemBlockRetweets)
-    val disablePromotedTweets = prefs.get(itemDisablePromotedTweets)
-    val disableWhoToFollow = prefs.get(itemDisableWhoToFollow)
-    val disableMediaWarning = prefs.get(itemDisableMediaWarning)
-    val followingMark = prefs.get(itemFollowingMark)
-    val followingMarkPrefix = prefs.get(itemFollowingMarkPrefix)
+    val blockRetweets get() = prefs.get(itemBlockRetweets)
+    val disablePromotedTweets get() = prefs.get(itemDisablePromotedTweets)
+    val disableWhoToFollow get() = prefs.get(itemDisableWhoToFollow)
+    val disableMediaWarning get() = prefs.get(itemDisableMediaWarning)
+    val followingMark get() = prefs.get(itemFollowingMark)
+    val followingMarkPrefix get() = prefs.get(itemFollowingMarkPrefix)
 }

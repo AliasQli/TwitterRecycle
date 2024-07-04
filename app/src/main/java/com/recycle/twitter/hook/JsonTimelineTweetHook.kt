@@ -7,10 +7,11 @@ import com.highcapable.yukihookapi.hook.param.PackageParam
 import com.highcapable.yukihookapi.hook.type.java.StringClass
 import com.recycle.twitter.data.Data
 
+/**
+ * Disable promoted tweets
+ */
 class JsonTimelineTweetHook(val data: Data) : Hook() {
     override fun PackageParam.load() {
-        if (!data.prefs.disablePromotedTweets) return
-
         val jsonTimelineTweetClass =
             "com.twitter.model.json.timeline.urt.JsonTimelineTweet".toClass()
         val jsonTimelineTweetMapperClass =
@@ -25,6 +26,8 @@ class JsonTimelineTweetHook(val data: Data) : Hook() {
             returnType = jsonTimelineTweetClass
         }.hook {
             after {
+                if (!data.prefs.disablePromotedTweets) return@after
+
                 result ?: return@after
                 jsonTimelineTweetClass.apply {
                     field {

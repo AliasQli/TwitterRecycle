@@ -13,8 +13,6 @@ import com.recycle.twitter.data.Data
  */
 class MarkUserHook(val data: Data) : Hook() {
     override fun PackageParam.load() {
-        if (!data.prefs.followingMark) return
-
         val legacyUserClassName =
             "com.twitter.api.model.json.core.GraphqlJsonTwitterUser\$JsonGraphQlLegacyTwitterUser"
         val legacyUserClass = legacyUserClassName.toClass()
@@ -24,6 +22,8 @@ class MarkUserHook(val data: Data) : Hook() {
             name = "parse"
         }.hook {
             after {
+                if (!data.prefs.followingMark) return@after
+
                 val id = legacyUserClass.field {
                     type = LongType
                     superClass()

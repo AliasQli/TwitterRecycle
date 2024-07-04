@@ -24,6 +24,10 @@ import java.io.InputStream
 
 /**
  * Hook JSON creation.
+ * In detail, this handles:
+ * - Parse "following" page
+ * - Handle (un)follow actions
+ * - Filter retweets from followed users
  */
 class JsonHook(val data: Data) : Hook() {
     private val timelineInstructionsAt = "data.timeline_response.timeline.instructions"
@@ -190,8 +194,7 @@ class JsonHook(val data: Data) : Hook() {
 
                 if (content.startsWith(timelineInstructionsFilter) || content.startsWith(
                         userInstructionsFilter
-                    )
-                    || content.startsWith("{\"id\":")
+                    ) || content.startsWith("{\"id\":")
                 ) {
                     try {
                         val json = JSONObject(content)

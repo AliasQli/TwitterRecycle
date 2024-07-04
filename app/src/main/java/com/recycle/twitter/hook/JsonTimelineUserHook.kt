@@ -6,10 +6,11 @@ import com.highcapable.yukihookapi.hook.log.YLog
 import com.highcapable.yukihookapi.hook.param.PackageParam
 import com.recycle.twitter.data.Data
 
-// Useless?
+/**
+ * Disable "who to follow"
+ */
 class JsonTimelineUserHook(val data: Data) : Hook() {
     override fun PackageParam.load() {
-        if (!data.prefs.disableWhoToFollow) return
 
         val jsonTimelineUserClass = "com.twitter.model.json.timeline.urt.JsonTimelineUser".toClass()
         val jsonTimelineUserMapperClass =
@@ -24,6 +25,7 @@ class JsonTimelineUserHook(val data: Data) : Hook() {
             returnType = jsonTimelineUserClass
         }.hook {
             after {
+                if (!data.prefs.disableWhoToFollow) return@after
                 result ?: return@after
                 jsonTimelineUserClass.apply {
                     field {
