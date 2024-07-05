@@ -30,7 +30,7 @@ object JsonTimelineEntryHook : Hook() {
                 val entryId = jsonTimelineEntryClass.field {
                     type = StringClass
                 }.get(result).string()
-                if (entryId.startsWith("tweet-") || entryId.startsWith("cursor-")) return@after
+
                 if (needRemove(entryId)) {
                     jsonTimelineEntryClass.field {
                         type {
@@ -38,8 +38,6 @@ object JsonTimelineEntryHook : Hook() {
                         }
                     }.get(result).setNull()
                     YLog.info("Removed timeline entry $entryId")
-                } else {
-                    YLog.info(entryId)
                 }
             }
         }
