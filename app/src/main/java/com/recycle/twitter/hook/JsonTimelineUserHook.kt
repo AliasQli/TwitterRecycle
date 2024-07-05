@@ -34,7 +34,7 @@ object JsonTimelineUserHook : Hook() {
                         type = jsonUserResultsClass
                     }.get(result).set(null)
                 }
-                YLog.info("Removed promoted user")
+                YLog.info("Removed who to follow")
             }
         }
     }

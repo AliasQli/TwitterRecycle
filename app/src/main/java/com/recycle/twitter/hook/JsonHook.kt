@@ -3,6 +3,7 @@
 
 package com.recycle.twitter.hook
 
+import com.highcapable.yukihookapi.hook.factory.constructor
 import com.highcapable.yukihookapi.hook.factory.field
 import com.highcapable.yukihookapi.hook.factory.method
 import com.highcapable.yukihookapi.hook.log.YLog
@@ -37,6 +38,14 @@ object JsonHook : Hook() {
         "{\"data\":{\"timeline_response\":{\"timeline\":{\"instructions\":["
     private const val userInstructionsFilter = "{\"data\":{\"user\":{\"timeline_response\":"
 
+    enum class FollowingState {
+        Nothing,
+        InFollowingPage,
+        GettingFollowing,
+    }
+
+    private var followingState = FollowingState.Nothing
+
     private fun JSONObject.timelineEntryNeedRetain(): Boolean {
         val entryId = optString("entryId")
 
@@ -54,20 +63,13 @@ object JsonHook : Hook() {
                     val screenName = legacy?.optString("screen_name")
                     val name = legacy?.optString("name")
                     if (followed) {
-                        YLog.info("Filter retweet from $name@$screenName#$restId")
+                        YLog.debug("Filter retweet from $name@$screenName#$restId")
                     } else {
                         YLog.debug("Don't filter retweet from $name@$screenName#$restId")
                     }
                     return !followed
                 }
         }
-//            else if (entryId.startsWith("promoted-tweet-") && data.prefs.disablePromotedTweets) {
-//                YLog.debug("Filtered promoted tweet")
-//                return false
-//            } else if (entryId.startsWith("who-to-follow-") && data.prefs.disableWhoToFollow) {
-//                YLog.debug("Filtered who to follow")
-//                return false
-//            }
         return true
     }
 
@@ -88,16 +90,30 @@ object JsonHook : Hook() {
             when (instruction.typename) {
                 "TimelineTerminateTimeline" -> {
                     when (instruction.optString("direction")) {
-                        "Top" -> {
-                            data.volatileUsers = mutableSetOf()
-                            YLog.info("User timeline start")
+                        "Top" -> when (followingState) {
+                            FollowingState.InFollowingPage -> {
+                                followingState = FollowingState.GettingFollowing
+                                data.volatileUsers = mutableSetOf()
+                                YLog.info("User timeline start")
+                            }
+
+                            FollowingState.GettingFollowing -> {
+                                followingState = FollowingState.Nothing
+                                YLog.info("Stop getting followed users")
+                            }
+
+                            FollowingState.Nothing -> {}
                         }
 
-                        "Bottom" -> isTerminate = true
+                        "Bottom" -> {
+                            if (followingState != FollowingState.GettingFollowing) return
+                            isTerminate = true
+                        }
                     }
                 }
 
                 "TimelineAddEntries" -> {
+                    if (followingState != FollowingState.GettingFollowing) return
                     var n = 0
                     instruction.optJSONArray("entries")?.forEach { entry ->
                         val entryId = entry.optString("entryId")
@@ -114,6 +130,7 @@ object JsonHook : Hook() {
         }
 
         if (isTerminate) {
+            followingState = FollowingState.Nothing
             data.persistentUsers = data.volatileUsers
             data.volatileUsers = mutableSetOf()
 
@@ -213,6 +230,15 @@ object JsonHook : Hook() {
                 }
 
                 args[0] = content.byteInputStream()
+            }
+        }
+
+        val followingTimelineActivity =
+            "com.twitter.users.following.FollowingTimelineActivity".toClass()
+        followingTimelineActivity.constructor().hookAll {
+            before {
+                followingState = FollowingState.InFollowingPage
+                YLog.info("into FollowingTimelineActivity")
             }
         }
     }
