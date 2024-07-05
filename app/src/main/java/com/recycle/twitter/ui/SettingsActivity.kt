@@ -28,6 +28,7 @@ class SettingsActivity : ModuleAppCompatActivity() {
             when (preference.key) {
                 data.prefs.extrasMenuKey -> {
                     ctx.startActivity(
+                        // Use class name because classloader doesn't work here
                         Intent()
                             .setComponent(
                                 ComponentName(
