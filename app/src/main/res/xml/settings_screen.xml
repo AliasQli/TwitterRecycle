@@ -4,6 +4,43 @@
     <PreferenceCategory
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:title="Premium settings"
+        app:iconSpaceReserved="false">
+
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="@bool/pretend_premium_def"
+            android:title="Pretend premium user"
+            app:iconSpaceReserved="false"
+            app:key="@string/pretend_premium" />
+        <EditTextPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Open &quot;Extras&quot; menu"
+            app:iconSpaceReserved="false"
+            app:key="@string/extras_menu_key" />
+        <EditTextPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Open &quot;Undo post&quot; menu"
+            app:iconSpaceReserved="false"
+            app:key="@string/undo_post_menu_key" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="@bool/enable_undo_post_def"
+            android:title="Enable &quot;Undo post&quot;"
+            app:iconSpaceReserved="false"
+            app:key="@string/enable_undo_post" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:title="Timeline settings"
         app:iconSpaceReserved="false">
 
@@ -63,13 +100,6 @@
             android:title="Disable media download protection"
             app:iconSpaceReserved="false"
             app:key="@string/unprotect_media" />
-        <SwitchPreference
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:defaultValue="@bool/pretend_premium_def"
-            android:title="Pretend premium user"
-            app:iconSpaceReserved="false"
-            app:key="@string/pretend_premium" />
     </PreferenceCategory>
     <PreferenceCategory
         android:layout_width="wrap_content"

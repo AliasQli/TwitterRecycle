@@ -1,7 +1,10 @@
 package com.recycle.twitter.ui
 
+import android.content.ComponentName
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.highcapable.yukihookapi.hook.xposed.parasitic.activity.base.ModuleAppCompatActivity
@@ -18,6 +21,40 @@ class SettingsActivity : ModuleAppCompatActivity() {
             PreferenceManager.getDefaultSharedPreferences(requireActivity())
                 .registerOnSharedPreferenceChangeListener(this)
             setPreferencesFromResource(R.xml.settings_screen, rootKey)
+        }
+
+        override fun onDisplayPreferenceDialog(preference: Preference) {
+            val ctx = context ?: return
+            when (preference.key) {
+                data.prefs.extrasMenuKey -> {
+                    ctx.startActivity(
+                        Intent()
+                            .setComponent(
+                                ComponentName(
+                                    ctx,
+                                    "com.twitter.feature.subscriptions.settings.extras.ExtrasSettingsActivity"
+                                )
+                            )
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    )
+
+                }
+
+                data.prefs.undoPostMenuKey -> {
+                    ctx.startActivity(
+                        Intent()
+                            .setComponent(
+                                ComponentName(
+                                    ctx,
+                                    "com.twitter.feature.subscriptions.settings.undotweet.UndoTweetSettingsActivity"
+                                )
+                            )
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    )
+                }
+
+                else -> super.onDisplayPreferenceDialog(preference)
+            }
         }
 
         override fun onSharedPreferenceChanged(

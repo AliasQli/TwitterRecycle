@@ -1,6 +1,5 @@
 package com.recycle.twitter.hook
 
-import android.app.Activity
 import android.content.Intent
 import android.widget.ImageView
 import com.highcapable.yukihookapi.hook.factory.allConstructors
@@ -21,10 +20,12 @@ object SettingsHook : Hook() {
                     val view = instance as ImageView
                     if (view.id == logoId) {
                         view.setOnLongClickListener {
-                            if (view.context is Activity) { // somehow it always is
-                                val host = view.context as Activity
-                                host.startActivity(Intent(host, SettingsActivity::class.java))
-                            }
+                            view.context.startActivity(
+                                Intent(
+                                    view.context,
+                                    SettingsActivity::class.java
+                                )
+                            )
                             true
                         }
                     }

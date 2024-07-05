@@ -25,8 +25,6 @@ class Data(context: Context, val dexKit: DexKitBridge) {
             put(itemPersistentUsers, persistentUsers)
         }
     }
-
-
 }
 
 lateinit var data: Data

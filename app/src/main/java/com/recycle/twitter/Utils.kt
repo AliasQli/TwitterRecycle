@@ -37,9 +37,6 @@ fun JSONObject.intoJSONObject(into: String): JSONObject? =
 fun JSONObject.intoJSONArray(into: String): JSONArray? =
     intoHelper(into, JSONObject::optJSONArray)
 
-fun JSONObject.intoString(into: String): String? =
-    intoHelper(into, JSONObject::optString)
-
 val JSONObject.typename: String get() = optString("__typename")
 
 fun JSONObject.hasTypename(name: String): Boolean = typename == name
