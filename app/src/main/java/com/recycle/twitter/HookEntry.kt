@@ -11,8 +11,11 @@ import com.recycle.twitter.hook.JsonHook
 import com.recycle.twitter.hook.JsonTimelineTweetHook
 import com.recycle.twitter.hook.JsonTimelineUserHook
 import com.recycle.twitter.hook.MarkUserHook
+import com.recycle.twitter.hook.PremiumHook
+import com.recycle.twitter.hook.ProtectedMediaHook
 import com.recycle.twitter.hook.SensitiveMediaHook
 import com.recycle.twitter.hook.SettingsHook
+import org.luckypray.dexkit.DexKitBridge
 
 @InjectYukiHookWithXposed
 object HookEntry : IYukiHookXposedInit {
@@ -42,20 +45,27 @@ object HookEntry : IYukiHookXposedInit {
                         baseContext.apply {
                             injectModuleAppResources()
                             registerModuleAppActivities()
-                            data = Data(this)
 
-                            val hooks = arrayListOf(
-                                JsonHook,
-                                MarkUserHook,
-                                JsonTimelineUserHook,
-                                JsonTimelineTweetHook,
-                                SensitiveMediaHook,
-                                SettingsHook,
-                            )
+                            System.loadLibrary("dexkit")
+                            DexKitBridge.create(baseContext.applicationInfo.sourceDir)
+                                .use { dexKit ->
+                                    data = Data(this, dexKit)
 
-                            hooks.forEach { hook ->
-                                hook.init(this@loadApp)
-                            }
+                                    val hooks = arrayListOf(
+                                        JsonHook,
+                                        MarkUserHook,
+                                        JsonTimelineUserHook,
+                                        JsonTimelineTweetHook,
+                                        SensitiveMediaHook,
+                                        ProtectedMediaHook,
+                                        PremiumHook,
+                                        SettingsHook,
+                                    )
+
+                                    hooks.forEach { hook ->
+                                        hook.init(this@loadApp)
+                                    }
+                                }
                         }
                     }
                 }

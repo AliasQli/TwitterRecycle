@@ -35,6 +35,20 @@
             android:title="Disable media warning"
             app:iconSpaceReserved="false"
             app:key="@string/disable_media_warning" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="@bool/unprotect_media_def"
+            android:title="Disable media download protection"
+            app:iconSpaceReserved="false"
+            app:key="@string/unprotect_media" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="@bool/pretend_premium_def"
+            android:title="Pretend premium user"
+            app:iconSpaceReserved="false"
+            app:key="@string/pretend_premium" />
     </PreferenceCategory>
     <PreferenceCategory
         android:layout_width="wrap_content"

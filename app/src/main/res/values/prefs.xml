@@ -14,6 +14,12 @@
     <string name="disable_media_warning">disable_media_warning</string>
     <bool name="disable_media_warning_def">true</bool>
 
+    <string name="unprotect_media">unprotect_media</string>
+    <bool name="unprotect_media_def">true</bool>
+
+    <string name="pretend_premium">pretend_premium</string>
+    <bool name="pretend_premium_def">true</bool>
+
     <string name="following_mark">following_mark</string>
     <bool name="following_mark_def">true</bool>
 

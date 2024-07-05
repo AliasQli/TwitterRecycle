@@ -53,6 +53,6 @@ dependencies {
     implementation(com.highcapable.yukihookapi.api)
     ksp(com.highcapable.yukihookapi.ksp.xposed)
 
-//    implementation("org.luckypray:dexkit:2.0.0")
-    implementation("com.tencent:mmkv:1.3.5")
+    implementation("org.luckypray:dexkit:2.0.2")
+//    implementation("com.tencent:mmkv:1.3.5")
 }
