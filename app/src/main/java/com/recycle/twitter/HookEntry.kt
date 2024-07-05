@@ -8,6 +8,7 @@ import com.highcapable.yukihookapi.hook.xposed.proxy.IYukiHookXposedInit
 import com.recycle.twitter.data.Data
 import com.recycle.twitter.data.data
 import com.recycle.twitter.hook.JsonHook
+import com.recycle.twitter.hook.JsonProfileUserHook
 import com.recycle.twitter.hook.JsonTimelineTweetHook
 import com.recycle.twitter.hook.JsonTimelineUserHook
 import com.recycle.twitter.hook.MarkUserHook
@@ -56,6 +57,7 @@ object HookEntry : IYukiHookXposedInit {
                                         MarkUserHook,
                                         JsonTimelineUserHook,
                                         JsonTimelineTweetHook,
+                                        JsonProfileUserHook,
                                         SensitiveMediaHook,
                                         ProtectedMediaHook,
                                         PremiumHook,

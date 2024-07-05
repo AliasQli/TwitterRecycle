@@ -18,6 +18,10 @@ class Prefs(context: Context, private val prefs: YukiHookPrefsBridge) {
         context.getString(R.string.disable_who_to_follow),
         context.resources.getBoolean(R.bool.disable_who_to_follow_def)
     )
+    private val itemDisableRecommendedUsers = PrefsData(
+        context.getString(R.string.disable_recommended_users),
+        context.resources.getBoolean(R.bool.disable_recommended_users_def)
+    )
     private val itemDisableMediaWarning = PrefsData(
         context.getString(R.string.disable_media_warning),
         context.resources.getBoolean(R.bool.disable_media_warning_def)
@@ -44,6 +48,7 @@ class Prefs(context: Context, private val prefs: YukiHookPrefsBridge) {
     var disablePromotedTweets = prefs.get(itemDisablePromotedTweets)
     var disableWhoToFollow = prefs.get(itemDisableWhoToFollow)
     var disableMediaWarning = prefs.get(itemDisableMediaWarning)
+    var disableRecommendedUsers = prefs.get(itemDisableRecommendedUsers)
     var unprotectMedia = prefs.get(itemUnprotectMedia)
     var pretendPremium = prefs.get(itemPretendPremium)
     var followingMark = prefs.get(itemFollowingMark)
@@ -53,12 +58,11 @@ class Prefs(context: Context, private val prefs: YukiHookPrefsBridge) {
         blockRetweets = prefs.get(itemBlockRetweets)
         disablePromotedTweets = prefs.get(itemDisablePromotedTweets)
         disableWhoToFollow = prefs.get(itemDisableWhoToFollow)
+        disableRecommendedUsers = prefs.get(itemDisableRecommendedUsers)
         disableMediaWarning = prefs.get(itemDisableMediaWarning)
         unprotectMedia = prefs.get(itemUnprotectMedia)
         pretendPremium = prefs.get(itemPretendPremium)
         followingMark = prefs.get(itemFollowingMark)
         followingMarkPrefix = prefs.get(itemFollowingMarkPrefix)
     }
-
-
 }

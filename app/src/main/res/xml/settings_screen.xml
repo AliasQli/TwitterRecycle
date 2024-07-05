@@ -20,14 +20,35 @@
             android:defaultValue="@bool/disable_promoted_tweets_def"
             android:title="Disable promoted tweets"
             app:iconSpaceReserved="false"
-            app:key="disable_promoted_tweets" />
+            app:key="@string/disable_promoted_tweets" />
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="@bool/disable_who_to_follow_def"
             android:title="Disable who to follow"
             app:iconSpaceReserved="false"
-            app:key="disable_who_to_follow" />
+            app:key="@string/disable_who_to_follow" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="User profile settings"
+        app:iconSpaceReserved="false">
+
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="@bool/disable_recommended_users_def"
+            android:title="Disable recommended users"
+            app:iconSpaceReserved="false"
+            app:key="@string/disable_recommended_users" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Media settings"
+        app:iconSpaceReserved="false">
+
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,7 +83,7 @@
             android:defaultValue="@bool/following_mark_def"
             android:title="Enabled"
             app:iconSpaceReserved="false"
-            app:key="following_mark" />
+            app:key="@string/following_mark" />
         <EditTextPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,7 +92,7 @@
             android:singleLine="true"
             android:title="Set mark prefix"
             app:iconSpaceReserved="false"
-            app:key="following_mark_prefix"
+            app:key="@string/following_mark_prefix"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 </PreferenceScreen>
