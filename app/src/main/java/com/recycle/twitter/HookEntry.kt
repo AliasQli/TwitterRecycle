@@ -9,8 +9,8 @@ import com.recycle.twitter.data.Data
 import com.recycle.twitter.data.data
 import com.recycle.twitter.hook.JsonHook
 import com.recycle.twitter.hook.JsonProfileUserHook
+import com.recycle.twitter.hook.JsonTimelineEntryHook
 import com.recycle.twitter.hook.JsonTimelineTweetHook
-import com.recycle.twitter.hook.JsonTimelineUserHook
 import com.recycle.twitter.hook.MarkUserHook
 import com.recycle.twitter.hook.PremiumHook
 import com.recycle.twitter.hook.ProtectedMediaHook
@@ -55,7 +55,7 @@ object HookEntry : IYukiHookXposedInit {
                                     val hooks = arrayListOf(
                                         JsonHook,
                                         MarkUserHook,
-                                        JsonTimelineUserHook,
+                                        JsonTimelineEntryHook,
                                         JsonTimelineTweetHook,
                                         JsonProfileUserHook,
                                         SensitiveMediaHook,
