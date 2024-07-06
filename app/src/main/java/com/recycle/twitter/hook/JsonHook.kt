@@ -9,13 +9,9 @@ import com.highcapable.yukihookapi.hook.factory.method
 import com.highcapable.yukihookapi.hook.log.YLog
 import com.highcapable.yukihookapi.hook.param.PackageParam
 import com.highcapable.yukihookapi.hook.type.java.InputStreamClass
-import com.recycle.twitter.checkTypename
 import com.recycle.twitter.data.data
-import com.recycle.twitter.filter
 import com.recycle.twitter.forEach
-import com.recycle.twitter.hasTypename
 import com.recycle.twitter.intoJSONArray
-import com.recycle.twitter.intoJSONObject
 import com.recycle.twitter.typename
 import org.json.JSONArray
 import org.json.JSONException
@@ -32,10 +28,7 @@ import java.io.InputStream
  * - Filter retweets from followed users
  */
 object JsonHook : Hook() {
-    private const val timelineInstructionsAt = "data.timeline_response.timeline.instructions"
     private const val userInstructionsAt = "data.user.timeline_response.timeline.instructions"
-    private const val timelineInstructionsFilter =
-        "{\"data\":{\"timeline_response\":{\"timeline\":{\"instructions\":["
     private const val userInstructionsFilter = "{\"data\":{\"user\":{\"timeline_response\":"
 
     enum class FollowingState {
@@ -45,43 +38,6 @@ object JsonHook : Hook() {
     }
 
     private var followingState = FollowingState.Nothing
-
-    private fun JSONObject.timelineEntryNeedRetain(): Boolean {
-        val entryId = optString("entryId")
-
-        if (entryId.startsWith("tweet-") && data.prefs.blockRetweets) {
-            optJSONObject("content")
-                ?.checkTypename("TimelineTimelineItem")?.optJSONObject("content")
-                ?.checkTypename("TimelineTweet")?.intoJSONObject("tweetResult.result")
-                ?.checkTypename("Tweet")?.intoJSONObject("legacy.retweeted_status_result.result")
-                ?.checkTypename("Tweet")?.intoJSONObject("core.user_result.result")
-                ?.checkTypename("User")?.apply {
-                    val restId = optString("rest_id")
-                    val followed = data.persistentUsers.contains(restId)
-
-                    val legacy = optJSONObject("legacy")
-                    val screenName = legacy?.optString("screen_name")
-                    val name = legacy?.optString("name")
-                    if (followed) {
-                        YLog.debug("Filter retweet from $name@$screenName#$restId")
-                    } else {
-                        YLog.debug("Don't filter retweet from $name@$screenName#$restId")
-                    }
-                    return !followed
-                }
-        }
-        return true
-    }
-
-    private fun processTimelineInstructions(timelineInstructions: JSONArray) {
-        timelineInstructions.forEach { instruction ->
-            if (instruction.hasTypename("TimelineAddEntries")) {
-                instruction.optJSONArray("entries")?.filter { entry ->
-                    entry.timelineEntryNeedRetain()
-                }
-            }
-        }
-    }
 
     private fun processUserInstructions(userInstructions: JSONArray) {
         var isTerminate = false
@@ -164,15 +120,6 @@ object JsonHook : Hook() {
     }
 
     private fun processJson(json: JSONObject) {
-        val timelineInstructions = json.intoJSONArray(timelineInstructionsAt)
-
-        if (timelineInstructions != null) {
-            YLog.info("Processing main page timeline")
-
-            processTimelineInstructions(timelineInstructions)
-            return
-        }
-
         val userInstructions = json.intoJSONArray(userInstructionsAt)
 
         if (userInstructions != null) {
@@ -214,9 +161,9 @@ object JsonHook : Hook() {
                     return@before
                 }
 
-                if (content.startsWith(timelineInstructionsFilter) || content.startsWith(
-                        userInstructionsFilter
-                    ) || content.startsWith("{\"id\":")
+                if (
+                    content.startsWith(userInstructionsFilter) ||
+                    content.startsWith("{\"id\":")
                 ) {
                     try {
                         val json = JSONObject(content)

@@ -9,7 +9,7 @@ import org.luckypray.dexkit.DexKitBridge
 
 class Data(context: Context, val dexKit: DexKitBridge) {
     private val yukiPrefs = context.prefs().native()
-    var prefs: Prefs = Prefs(context, yukiPrefs)
+    val prefs: Prefs = Prefs(context, yukiPrefs)
     val getId = context::getId
 
     private val itemPersistentUsers = PrefsData(
