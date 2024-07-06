@@ -8,7 +8,6 @@ import com.highcapable.yukihookapi.hook.xposed.proxy.IYukiHookXposedInit
 import com.recycle.twitter.data.Data
 import com.recycle.twitter.data.data
 import com.recycle.twitter.hook.JsonApiTweetHook
-import com.recycle.twitter.hook.JsonHook
 import com.recycle.twitter.hook.JsonProfileUserHook
 import com.recycle.twitter.hook.JsonTimelineEntryHook
 import com.recycle.twitter.hook.JsonTimelineTweetHook
@@ -54,7 +53,6 @@ object HookEntry : IYukiHookXposedInit {
                                     data = Data(this, dexKit)
 
                                     val hooks = arrayListOf(
-                                        JsonHook,
                                         JsonApiTweetHook,
                                         MarkUserHook,
                                         JsonTimelineEntryHook,
