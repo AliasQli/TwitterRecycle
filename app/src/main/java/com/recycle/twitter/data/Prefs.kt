@@ -29,6 +29,14 @@ class Prefs(context: Context, private val prefs: YukiHookPrefsBridge) {
         context.getString(R.string.disable_who_to_follow),
         context.resources.getBoolean(R.bool.disable_who_to_follow_def)
     )
+    private val itemDisablePinnedTweets = PrefsData(
+        context.getString(R.string.disable_pinned_tweets),
+        context.resources.getBoolean(R.bool.disable_pinned_tweets_def)
+    )
+    private val itemHideNewTweetsBanner = PrefsData(
+        context.getString(R.string.hide_new_tweets_banner),
+        context.resources.getBoolean(R.bool.hide_new_tweets_banner_def)
+    )
     private val itemDisableRecommendedUsers = PrefsData(
         context.getString(R.string.disable_recommended_users),
         context.resources.getBoolean(R.bool.disable_recommended_users_def)
@@ -56,8 +64,10 @@ class Prefs(context: Context, private val prefs: YukiHookPrefsBridge) {
     var blockRetweets = prefs.get(itemBlockRetweets)
     var disablePromotedTweets = prefs.get(itemDisablePromotedTweets)
     var disableWhoToFollow = prefs.get(itemDisableWhoToFollow)
-    var disableMediaWarning = prefs.get(itemDisableMediaWarning)
+    var disablePinnedTweets = prefs.get(itemDisablePinnedTweets)
+    var hideNewTweetsBanner = prefs.get(itemHideNewTweetsBanner)
     var disableRecommendedUsers = prefs.get(itemDisableRecommendedUsers)
+    var disableMediaWarning = prefs.get(itemDisableMediaWarning)
     var unprotectMedia = prefs.get(itemUnprotectMedia)
     var followingMark = prefs.get(itemFollowingMark)
     var followingMarkPrefix = prefs.get(itemFollowingMarkPrefix)
@@ -68,6 +78,8 @@ class Prefs(context: Context, private val prefs: YukiHookPrefsBridge) {
         blockRetweets = prefs.get(itemBlockRetweets)
         disablePromotedTweets = prefs.get(itemDisablePromotedTweets)
         disableWhoToFollow = prefs.get(itemDisableWhoToFollow)
+        disablePinnedTweets = prefs.get(itemDisablePinnedTweets)
+        hideNewTweetsBanner = prefs.get(itemHideNewTweetsBanner)
         disableRecommendedUsers = prefs.get(itemDisableRecommendedUsers)
         disableMediaWarning = prefs.get(itemDisableMediaWarning)
         unprotectMedia = prefs.get(itemUnprotectMedia)

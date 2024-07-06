@@ -12,7 +12,7 @@ object JsonTimelineEntryHook : Hook() {
     private fun needRemove(entryId: String): Boolean {
         if (entryId.startsWith("superhero-") && data.prefs.disablePromotedTweets) return true
         if (entryId.startsWith("who-to-follow-") && data.prefs.disableWhoToFollow) return true
-        if (entryId.startsWith("who-to-subscribe-") && data.prefs.disableWhoToFollow) return true
+        if (entryId.startsWith("pinned-tweets-") && data.prefs.disablePinnedTweets) return true
         return false
     }
 

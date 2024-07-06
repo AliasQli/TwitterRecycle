@@ -19,6 +19,12 @@
     <string name="disable_who_to_follow">disable_who_to_follow</string>
     <bool name="disable_who_to_follow_def">true</bool>
 
+    <string name="disable_pinned_tweets">disable_pinned_tweets</string>
+    <bool name="disable_pinned_tweets_def">true</bool>
+
+    <string name="hide_new_tweets_banner">hide_new_tweets_banner</string>
+    <bool name="hide_new_tweets_banner_def">false</bool>
+
     <string name="disable_recommended_users">disable_recommended_users</string>
     <bool name="disable_recommended_users_def">true</bool>
 

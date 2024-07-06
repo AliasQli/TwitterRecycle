@@ -65,6 +65,20 @@
             android:title="Disable who to follow"
             app:iconSpaceReserved="false"
             app:key="@string/disable_who_to_follow" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="@bool/disable_pinned_tweets_def"
+            android:title="Disable pinned tweets"
+            app:iconSpaceReserved="false"
+            app:key="@string/disable_pinned_tweets" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="@bool/hide_new_tweets_banner_def"
+            android:title="Hide &quot;new tweets&quot; banner"
+            app:iconSpaceReserved="false"
+            app:key="@string/hide_new_tweets_banner" />
     </PreferenceCategory>
     <PreferenceCategory
         android:layout_width="wrap_content"
