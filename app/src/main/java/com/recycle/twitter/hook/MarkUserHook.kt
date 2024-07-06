@@ -7,7 +7,7 @@ import com.highcapable.yukihookapi.hook.param.PackageParam
 import com.highcapable.yukihookapi.hook.type.java.BooleanClass
 import com.highcapable.yukihookapi.hook.type.java.LongType
 import com.highcapable.yukihookapi.hook.type.java.StringClass
-import com.recycle.twitter.data.data
+import com.recycle.twitter.data.config
 
 /**
  * Mark followed users
@@ -22,7 +22,7 @@ object MarkUserHook : Hook() {
             name = "parse"
         }.hook {
             after {
-                if (!data.prefs.followingMark) return@after
+                if (!config.followingMark) return@after
 
                 val following = restJsonTwitterUser.field {
                     type = BooleanClass
@@ -41,7 +41,7 @@ object MarkUserHook : Hook() {
                         type = StringClass
                         order()
                     }.get(result).apply {
-                        set("${data.prefs.followingMarkPrefix}${string()}")
+                        set("${config.followingMarkPrefix}${string()}")
                         YLog.debug("Marked user ${string()}#$id")
                     }
                 }

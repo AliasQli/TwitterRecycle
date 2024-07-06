@@ -6,13 +6,13 @@ import com.highcapable.yukihookapi.hook.log.YLog
 import com.highcapable.yukihookapi.hook.param.PackageParam
 import com.highcapable.yukihookapi.hook.type.java.LongType
 import com.highcapable.yukihookapi.hook.type.java.StringClass
-import com.recycle.twitter.data.data
+import com.recycle.twitter.data.config
 
 object JsonTimelineEntryHook : Hook() {
     private fun needRemove(entryId: String): Boolean {
-        if (entryId.startsWith("superhero-") && data.prefs.disablePromotedTweets) return true
-        if (entryId.startsWith("who-to-follow-") && data.prefs.disableWhoToFollow) return true
-        if (entryId.startsWith("pinned-tweets-") && data.prefs.disablePinnedTweets) return true
+        if (entryId.startsWith("superhero-") && config.disablePromotedTweets) return true
+        if (entryId.startsWith("who-to-follow-") && config.disableWhoToFollow) return true
+        if (entryId.startsWith("pinned-tweets-") && config.disablePinnedTweets) return true
         return false
     }
 
@@ -38,6 +38,15 @@ object JsonTimelineEntryHook : Hook() {
                         }
                     }.get(result).setNull()
                     YLog.info("Removed timeline entry $entryId")
+                } else if (
+                    !entryId.startsWith("tweet-") &&
+                    !entryId.startsWith("Guide-") &&
+                    !entryId.startsWith("conversationthread-") &&
+                    !entryId.startsWith("profile-conversation-") &&
+                    !entryId.startsWith("community-to-join-") &&
+                    !entryId.startsWith("cursor:")
+                ) {
+                    YLog.warn("entryId $entryId")
                 }
             }
         }

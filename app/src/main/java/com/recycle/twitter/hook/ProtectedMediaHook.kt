@@ -5,7 +5,7 @@ import com.highcapable.yukihookapi.hook.factory.field
 import com.highcapable.yukihookapi.hook.factory.method
 import com.highcapable.yukihookapi.hook.param.PackageParam
 import com.highcapable.yukihookapi.hook.type.java.BooleanType
-import com.recycle.twitter.data.data
+import com.recycle.twitter.data.config
 
 object ProtectedMediaHook : Hook() {
     override fun PackageParam.load() {
@@ -19,7 +19,7 @@ object ProtectedMediaHook : Hook() {
             name = "parse"
         }.hook {
             after {
-                if (!data.prefs.unprotectMedia) return@after
+                if (!config.unprotectMedia) return@after
 
                 val status = jsonMediaEntityClass.field {
                     type = jsonAllowDownloadStatusClass

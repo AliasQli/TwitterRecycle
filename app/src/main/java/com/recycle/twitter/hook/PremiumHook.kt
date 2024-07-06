@@ -1,12 +1,12 @@
 package com.recycle.twitter.hook
 
 import com.highcapable.yukihookapi.hook.param.PackageParam
-import com.recycle.twitter.data.data
+import com.recycle.twitter.data.config
 import java.lang.reflect.Modifier
 
 object PremiumHook : Hook() {
     override fun PackageParam.load() {
-        val premiumCompanionClass = data.dexKit.findClass {
+        val premiumCompanionClass = dexKit.findClass {
             findFirst = true
             matcher {
                 usingStrings(
@@ -32,7 +32,7 @@ object PremiumHook : Hook() {
             }
         }.single().getMethodInstance(appClassLoader!!).hook {
             after {
-                if (data.prefs.pretendPremium) resultTrue()
+                if (config.pretendPremium) resultTrue()
             }
         }
 
@@ -44,11 +44,11 @@ object PremiumHook : Hook() {
             }
         }.single().getMethodInstance(appClassLoader!!).hook {
             after {
-                if (args(1).string() == "subscriptions_feature_1003" && data.prefs.enableUndoPost) resultTrue()
+                if (args(1).string() == "subscriptions_feature_1003" && config.enableUndoPost) resultTrue()
             }
         }
 
-        data.dexKit.findMethod {
+        dexKit.findMethod {
             matcher {
                 name = "invoke"
                 usingStrings("subscriptions_feature_1003")
@@ -56,7 +56,7 @@ object PremiumHook : Hook() {
             }
         }.single().getMethodInstance(appClassLoader!!).hook {
             after {
-                if (data.prefs.enableUndoPost) resultTrue()
+                if (config.enableUndoPost) resultTrue()
             }
         }
     }

@@ -4,17 +4,17 @@ import android.view.View
 import com.highcapable.yukihookapi.hook.factory.method
 import com.highcapable.yukihookapi.hook.log.YLog
 import com.highcapable.yukihookapi.hook.param.PackageParam
-import com.recycle.twitter.data.data
+import com.recycle.twitter.data.config
 
 object BannerHook : Hook() {
     override fun PackageParam.load() {
-        val bannerId = data.getId("banner", "id")
+        val bannerId = getId("banner", "id")
 
         View::class.java.method {
             name = "setVisibility"
         }.hook {
             before {
-                if (!data.prefs.hideNewTweetsBanner) return@before
+                if (!config.hideNewTweetsBanner) return@before
 
                 val view = instance as View
                 val visibility = args(0).int()

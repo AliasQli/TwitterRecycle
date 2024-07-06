@@ -10,7 +10,7 @@ import com.highcapable.yukihookapi.hook.type.java.BooleanType
 import com.highcapable.yukihookapi.hook.type.java.IntType
 import com.highcapable.yukihookapi.hook.type.java.LongType
 import com.highcapable.yukihookapi.hook.type.java.StringClass
-import com.recycle.twitter.data.data
+import com.recycle.twitter.data.config
 import de.robv.android.xposed.XposedHelpers
 
 /**
@@ -66,7 +66,7 @@ object JsonApiTweetHook : Hook() {
             name = "parse"
         }.hook {
             after {
-                if (!data.prefs.blockRetweets) return@after
+                if (!config.blockRetweets) return@after
                 result ?: return@after
 
                 val legacy = jsonApiTweetClass.field {

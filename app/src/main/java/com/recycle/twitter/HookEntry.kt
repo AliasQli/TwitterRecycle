@@ -5,9 +5,10 @@ import com.highcapable.yukihookapi.annotation.xposed.InjectYukiHookWithXposed
 import com.highcapable.yukihookapi.hook.factory.injectModuleAppResources
 import com.highcapable.yukihookapi.hook.factory.registerModuleAppActivities
 import com.highcapable.yukihookapi.hook.xposed.proxy.IYukiHookXposedInit
-import com.recycle.twitter.data.Data
-import com.recycle.twitter.data.data
+import com.recycle.twitter.data.Config
+import com.recycle.twitter.data.config
 import com.recycle.twitter.hook.BannerHook
+import com.recycle.twitter.hook.Hook
 import com.recycle.twitter.hook.JsonApiTweetHook
 import com.recycle.twitter.hook.JsonProfileUserHook
 import com.recycle.twitter.hook.JsonTimelineEntryHook
@@ -47,11 +48,12 @@ object HookEntry : IYukiHookXposedInit {
                         baseContext.apply {
                             injectModuleAppResources()
                             registerModuleAppActivities()
+                            config = Config(this)
 
                             System.loadLibrary("dexkit")
                             DexKitBridge.create(baseContext.applicationInfo.sourceDir)
                                 .use { dexKit ->
-                                    data = Data(this, dexKit)
+                                    Hook.init(baseContext, dexKit)
 
                                     val hooks = arrayListOf(
                                         JsonApiTweetHook,

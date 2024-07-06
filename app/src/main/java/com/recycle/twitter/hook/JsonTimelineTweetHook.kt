@@ -5,7 +5,7 @@ import com.highcapable.yukihookapi.hook.factory.method
 import com.highcapable.yukihookapi.hook.log.YLog
 import com.highcapable.yukihookapi.hook.param.PackageParam
 import com.highcapable.yukihookapi.hook.type.java.StringClass
-import com.recycle.twitter.data.data
+import com.recycle.twitter.data.config
 
 /**
  * Disable promoted tweets
@@ -26,7 +26,7 @@ object JsonTimelineTweetHook : Hook() {
             returnType = jsonTimelineTweetClass
         }.hook {
             after {
-                if (!data.prefs.disablePromotedTweets) return@after
+                if (!config.disablePromotedTweets) return@after
 
                 result ?: return@after
                 jsonTimelineTweetClass.apply {

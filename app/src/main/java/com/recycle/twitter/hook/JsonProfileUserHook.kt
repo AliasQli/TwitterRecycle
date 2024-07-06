@@ -5,11 +5,11 @@ import com.highcapable.yukihookapi.hook.factory.method
 import com.highcapable.yukihookapi.hook.log.YLog
 import com.highcapable.yukihookapi.hook.param.PackageParam
 import com.highcapable.yukihookapi.hook.type.java.ArrayListClass
-import com.recycle.twitter.data.data
+import com.recycle.twitter.data.config
 
 object JsonProfileUserHook : Hook() {
     override fun PackageParam.load() {
-        if (!data.prefs.disableRecommendedUsers) return
+        if (!config.disableRecommendedUsers) return
 
         val jsonProfileRecommendationModuleResponseClass =
             "com.twitter.model.json.people.JsonProfileRecommendationModuleResponse".toClass()

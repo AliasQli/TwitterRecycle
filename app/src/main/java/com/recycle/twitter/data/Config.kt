@@ -1,11 +1,13 @@
 package com.recycle.twitter.data
 
 import android.content.Context
-import com.highcapable.yukihookapi.hook.xposed.prefs.YukiHookPrefsBridge
+import com.highcapable.yukihookapi.hook.factory.prefs
 import com.highcapable.yukihookapi.hook.xposed.prefs.data.PrefsData
 import com.recycle.twitter.R
 
-class Prefs(context: Context, private val prefs: YukiHookPrefsBridge) {
+class Config(context: Context) {
+    private val prefs = context.prefs().native()
+
     val extrasMenuKey = context.getString(R.string.extras_menu_key)
     val undoPostMenuKey = context.getString(R.string.undo_post_menu_key)
 
@@ -58,32 +60,21 @@ class Prefs(context: Context, private val prefs: YukiHookPrefsBridge) {
         context.resources.getString(R.string.following_mark_prefix_def)
     )
 
-    // Don't modify; it's exposed just for convenience
-    var pretendPremium = prefs.get(itemPretendPremium)
-    var enableUndoPost = prefs.get(itemEnableUndoPost)
-    var blockRetweets = prefs.get(itemBlockRetweets)
-    var disablePromotedTweets = prefs.get(itemDisablePromotedTweets)
-    var disableWhoToFollow = prefs.get(itemDisableWhoToFollow)
-    var disablePinnedTweets = prefs.get(itemDisablePinnedTweets)
-    var hideNewTweetsBanner = prefs.get(itemHideNewTweetsBanner)
-    var disableRecommendedUsers = prefs.get(itemDisableRecommendedUsers)
-    var disableMediaWarning = prefs.get(itemDisableMediaWarning)
-    var unprotectMedia = prefs.get(itemUnprotectMedia)
-    var followingMark = prefs.get(itemFollowingMark)
-    var followingMarkPrefix = prefs.get(itemFollowingMarkPrefix)
+    private val allCache = mutableSetOf<Cache<*>>()
+    fun refresh() = allCache.forEach(Cache<*>::refresh)
 
-    fun refresh() {
-        pretendPremium = prefs.get(itemPretendPremium)
-        enableUndoPost = prefs.get(itemEnableUndoPost)
-        blockRetweets = prefs.get(itemBlockRetweets)
-        disablePromotedTweets = prefs.get(itemDisablePromotedTweets)
-        disableWhoToFollow = prefs.get(itemDisableWhoToFollow)
-        disablePinnedTweets = prefs.get(itemDisablePinnedTweets)
-        hideNewTweetsBanner = prefs.get(itemHideNewTweetsBanner)
-        disableRecommendedUsers = prefs.get(itemDisableRecommendedUsers)
-        disableMediaWarning = prefs.get(itemDisableMediaWarning)
-        unprotectMedia = prefs.get(itemUnprotectMedia)
-        followingMark = prefs.get(itemFollowingMark)
-        followingMarkPrefix = prefs.get(itemFollowingMarkPrefix)
-    }
+    val pretendPremium by Cache(allCache) { prefs.get(itemPretendPremium) }
+    val enableUndoPost by Cache(allCache) { prefs.get(itemEnableUndoPost) }
+    val blockRetweets by Cache(allCache) { prefs.get(itemBlockRetweets) }
+    val disablePromotedTweets by Cache(allCache) { prefs.get(itemDisablePromotedTweets) }
+    val disableWhoToFollow by Cache(allCache) { prefs.get(itemDisableWhoToFollow) }
+    val disablePinnedTweets by Cache(allCache) { prefs.get(itemDisablePinnedTweets) }
+    val hideNewTweetsBanner by Cache(allCache) { prefs.get(itemHideNewTweetsBanner) }
+    val disableRecommendedUsers by Cache(allCache) { prefs.get(itemDisableRecommendedUsers) }
+    val disableMediaWarning by Cache(allCache) { prefs.get(itemDisableMediaWarning) }
+    val unprotectMedia by Cache(allCache) { prefs.get(itemUnprotectMedia) }
+    val followingMark by Cache(allCache) { prefs.get(itemFollowingMark) }
+    val followingMarkPrefix by Cache(allCache) { prefs.get(itemFollowingMarkPrefix) }
 }
+
+lateinit var config: Config

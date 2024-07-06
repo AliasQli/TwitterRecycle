@@ -9,7 +9,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.highcapable.yukihookapi.hook.xposed.parasitic.activity.base.ModuleAppCompatActivity
 import com.recycle.twitter.R
-import com.recycle.twitter.data.data
+import com.recycle.twitter.data.config
 
 class SettingsActivity : ModuleAppCompatActivity() {
     override val moduleTheme: Int
@@ -26,7 +26,7 @@ class SettingsActivity : ModuleAppCompatActivity() {
         override fun onDisplayPreferenceDialog(preference: Preference) {
             val ctx = context ?: return
             when (preference.key) {
-                data.prefs.extrasMenuKey -> {
+                config.extrasMenuKey -> {
                     ctx.startActivity(
                         // Use class name because classloader doesn't work here
                         Intent()
@@ -41,7 +41,7 @@ class SettingsActivity : ModuleAppCompatActivity() {
 
                 }
 
-                data.prefs.undoPostMenuKey -> {
+                config.undoPostMenuKey -> {
                     ctx.startActivity(
                         Intent()
                             .setComponent(
@@ -62,7 +62,7 @@ class SettingsActivity : ModuleAppCompatActivity() {
             sharedPreferences: SharedPreferences?,
             key: String?
         ) {
-            data.prefs.refresh()
+            config.refresh()
         }
     }
 

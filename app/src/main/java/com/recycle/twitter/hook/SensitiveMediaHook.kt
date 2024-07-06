@@ -4,7 +4,7 @@ import com.highcapable.yukihookapi.hook.factory.field
 import com.highcapable.yukihookapi.hook.factory.method
 import com.highcapable.yukihookapi.hook.param.PackageParam
 import com.highcapable.yukihookapi.hook.type.java.BooleanType
-import com.recycle.twitter.data.data
+import com.recycle.twitter.data.config
 
 /**
  * Make media insensitive
@@ -20,7 +20,7 @@ object SensitiveMediaHook : Hook() {
             name = "parse"
         }.hook {
             after {
-                if (!data.prefs.disableMediaWarning) return@after
+                if (!config.disableMediaWarning) return@after
 
                 result ?: return@after
                 jsonSensitiveMediaWarningClass.field {

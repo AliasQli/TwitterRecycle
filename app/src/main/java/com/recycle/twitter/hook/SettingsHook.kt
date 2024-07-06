@@ -4,7 +4,6 @@ import android.content.Intent
 import android.widget.ImageView
 import com.highcapable.yukihookapi.hook.factory.allConstructors
 import com.highcapable.yukihookapi.hook.param.PackageParam
-import com.recycle.twitter.data.data
 import com.recycle.twitter.ui.SettingsActivity
 
 /**
@@ -12,7 +11,7 @@ import com.recycle.twitter.ui.SettingsActivity
  * */
 object SettingsHook : Hook() {
     override fun PackageParam.load() {
-        val logoId = data.getId("logo", "id")
+        val logoId = getId("logo", "id")
 
         ImageView::class.java.allConstructors { _, constructor ->
             constructor.hook {
