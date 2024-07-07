@@ -41,7 +41,7 @@
     <!-- LSPosed 作用域声明 -->
     <meta-data
         android:name="xposedscope"
-        android:value="com.twitter.android;com.twitter.aeromod" />
+        android:value="com.twitter.android" />
 
 <!--    <activity-->
 <!--        android:name=".ui.MainActivity"-->
