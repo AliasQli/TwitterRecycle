@@ -1,3 +1,58 @@
 <resources>
     <string name="app_name" translatable="false">TwitterRecycle</string>
+
+    <string name="premium_settings_title">Premium settings</string>
+
+    <string name="pretend_premium_user_title">Pretend premium user</string>
+
+    <string name="enable_read_mode_title">Enable \"Read Mode\"</string>
+    <string name="enable_read_mode_summary">Read mode icon will appear on the top right corner of long tweets</string>
+
+    <string name="enable_undo_post_title">Enable \"Undo post\"</string>
+    <string name="enable_undo_post_summary">Defer sending a tweet. Its settings is in \"Early access\"</string>
+
+    <string name="open_early_access_menu_title">Open \"Early access\" menu (premium feature)</string>
+
+    <string name="open_extras_menu_title">Open \"Extras\" menu  (premium feature)</string>
+    <string name="open_extras_menu_symmary">Custom app icon is known not to work</string>
+
+    <string name="cleanup_settings_title">Cleanup settings</string>
+
+    <string name="block_retweets_title">Block retweets from followed users</string>
+    <string name="block_retweets_summary">Block retweets whose original sender is already followed</string>
+
+    <string name="disable_promoted_tweets_title">Disable promoted tweets</string>
+
+    <string name="disable_who_to_follow_title">Disable \"Who To Follow\"</string>
+
+    <string name="disable_recommended_users_title">Disable recommended users</string>
+    <string name="disable_recommended_users_summary">User recommendation when you follow a user in their profile</string>
+
+    <string name="disable_pinned_tweets_title">Disable pinned tweets</string>
+    <string name="disable_pinned_tweets_summary">Tweets pinned by users you follow, appearing in the main timeline</string>
+
+    <string name="disable_bookmarked_tweets_title">Disable bookmarked tweets</string>
+    <string name="disable_bookmarked_tweets_summary">Your bookmarked tweets, appearing in the main timeline</string>
+
+    <string name="disable_tweet_detail_related_tweets_title">Disable tweet detail related tweets</string>
+    <string name="disable_tweet_detail_related_tweets_summary">\"Find More\" in tweet detail</string>
+
+    <string name="hide_new_tweets_banner_title">Hide \"new tweets\" banner</string>
+    <string name="hide_new_tweets_banner_summary">Hide the blue banner on the main page</string>
+
+    <string name="media_settings_title">Media settings</string>
+
+    <string name="disable_media_warning_title">Disable media warning</string>
+    <string name="disable_media_warning_summary">Remove all media blurs</string>
+
+    <string name="unprotect_media_title">Disable media download protection</string>
+    <string name="unprotect_media_summary">Allow downloading all media (still need to be premium to download videos)</string>
+
+    <string name="mark_followed_users_title">Mark followed users</string>
+
+    <string name="following_mark_title">Enabled</string>
+    <string name="following_mark_summary">If enabled, the prefix below will be prepended to their username if followed</string>
+
+    <string name="following_mark_prefix_title">Mark with prefix</string>
+    <string name="pretend_premium_user_summary">Enable some local features. At least you can download videos</string>
 </resources>

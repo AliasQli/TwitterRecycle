@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="persistent_users_key" translatable="false">following_users</string>
-    <string name="custom_navigation_menu_key" translatable="false">custom_navigation_menu_key</string>
+    <string name="extras_menu_key" translatable="false">extras_menu_key</string>
     <string name="early_access_menu_key" translatable="false">early_access_menu_key</string>
 
     <string name="pretend_premium" translatable="false">pretend_premium</string>

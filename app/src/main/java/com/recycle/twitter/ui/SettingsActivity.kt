@@ -26,7 +26,7 @@ class SettingsActivity : ModuleAppCompatActivity() {
         override fun onDisplayPreferenceDialog(preference: Preference) {
             val ctx = context ?: return
             when (preference.key) {
-                config.customNavigationMenuKey -> {
+                config.extrasMenuKey -> {
                     ctx.startActivity(
                         // Use class name because classloader doesn't work here
                         Intent()
@@ -47,7 +47,7 @@ class SettingsActivity : ModuleAppCompatActivity() {
                             .setComponent(
                                 ComponentName(
                                     ctx,
-                                    "com.twitter.feature.twitterblue.settings.tabcustomization.TabCustomizationActivity"
+                                    "com.twitter.feature.subscriptions.settings.earlyaccess.EarlyAccessSettingsActivity"
                                 )
                             )
                             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

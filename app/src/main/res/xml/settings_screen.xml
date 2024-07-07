@@ -4,36 +4,39 @@
     <PreferenceCategory
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Premium settings"
+        android:title="@string/premium_settings_title"
         app:iconSpaceReserved="false">
 
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="@bool/pretend_premium_def"
-            android:title="Pretend premium user"
+            android:title="@string/pretend_premium_user_title"
             app:iconSpaceReserved="false"
-            app:key="@string/pretend_premium" />
+            app:key="@string/pretend_premium"
+            app:summary="@string/pretend_premium_user_summary" />
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="@bool/enable_read_mode_def"
-            android:title="Enable &quot;Read mode&quot;"
+            android:title="@string/enable_read_mode_title"
             app:iconSpaceReserved="false"
-            app:key="@string/enable_read_mode" />
+            app:key="@string/enable_read_mode"
+            app:summary="@string/enable_read_mode_summary" />
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="@bool/enable_undo_post_def"
-            android:title="Enable &quot;Undo post&quot;"
+            android:title="@string/enable_undo_post_title"
             app:iconSpaceReserved="false"
-            app:key="@string/enable_undo_post" />
+            app:key="@string/enable_undo_post"
+            app:summary="@string/enable_undo_post_summary" />
         <EditTextPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="Open &quot;Early access&quot; menu"
+            android:title="@string/open_early_access_menu_title"
             app:iconSpaceReserved="false"
             app:key="@string/early_access_menu_key" />
         <EditTextPreference
@@ -41,114 +44,124 @@
             android:layout_height="wrap_content"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="Open &quot;Custom Navigation&quot; menu"
+            android:title="@string/open_extras_menu_title"
             app:iconSpaceReserved="false"
-            app:key="@string/custom_navigation_menu_key" />
+            app:key="@string/extras_menu_key"
+            app:summary="@string/open_extras_menu_symmary" />
     </PreferenceCategory>
     <PreferenceCategory
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Cleanup settings"
+        android:title="@string/cleanup_settings_title"
         app:iconSpaceReserved="false">
 
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="@bool/block_retweets_def"
-            android:title="Block retweets from followed users"
+            android:title="@string/block_retweets_title"
             app:iconSpaceReserved="false"
-            app:key="@string/block_retweets" />
+            app:key="@string/block_retweets"
+            app:summary="@string/block_retweets_summary" />
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="@bool/disable_promoted_tweets_def"
-            android:title="Disable promoted tweets"
+            android:title="@string/disable_promoted_tweets_title"
             app:iconSpaceReserved="false"
             app:key="@string/disable_promoted_tweets" />
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="@bool/disable_who_to_follow_def"
-            android:title="Disable who to follow"
+            android:title="@string/disable_who_to_follow_title"
             app:iconSpaceReserved="false"
             app:key="@string/disable_who_to_follow" />
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="@bool/disable_recommended_users_def"
-            android:title="Disable recommended users"
+            android:title="@string/disable_recommended_users_title"
             app:iconSpaceReserved="false"
-            app:key="@string/disable_recommended_users" />
+            app:key="@string/disable_recommended_users"
+            app:summary="@string/disable_recommended_users_summary" />
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="@bool/disable_pinned_tweets_def"
-            android:title="Disable pinned tweets"
+            android:title="@string/disable_pinned_tweets_title"
             app:iconSpaceReserved="false"
-            app:key="@string/disable_pinned_tweets" />
+            app:key="@string/disable_pinned_tweets"
+            app:summary="@string/disable_pinned_tweets_summary" />
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="@bool/disable_bookmarked_tweets_def"
-            android:title="Disable bookmarked tweets"
+            android:title="@string/disable_bookmarked_tweets_title"
             app:iconSpaceReserved="false"
-            app:key="@string/disable_bookmarked_tweets" />
+            app:key="@string/disable_bookmarked_tweets"
+            app:summary="@string/disable_bookmarked_tweets_summary" />
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="@bool/disable_tweet_detail_related_tweets_def"
-            android:title="Disable tweet detail related tweets"
+            android:title="@string/disable_tweet_detail_related_tweets_title"
             app:iconSpaceReserved="false"
-            app:key="@string/disable_tweet_detail_related_tweets" />
+            app:key="@string/disable_tweet_detail_related_tweets"
+            app:summary="@string/disable_tweet_detail_related_tweets_summary" />
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="@bool/hide_new_tweets_banner_def"
-            android:title="Hide &quot;new tweets&quot; banner"
+            android:title="@string/hide_new_tweets_banner_title"
             app:iconSpaceReserved="false"
-            app:key="@string/hide_new_tweets_banner" />
+            app:key="@string/hide_new_tweets_banner"
+            app:summary="@string/hide_new_tweets_banner_summary" />
     </PreferenceCategory>
     <PreferenceCategory
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Media settings"
+        android:title="@string/media_settings_title"
         app:iconSpaceReserved="false">
 
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="@bool/disable_media_warning_def"
-            android:title="Disable media warning"
+            android:title="@string/disable_media_warning_title"
             app:iconSpaceReserved="false"
-            app:key="@string/disable_media_warning" />
+            app:key="@string/disable_media_warning"
+            app:summary="@string/disable_media_warning_summary" />
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="@bool/unprotect_media_def"
-            android:title="Disable media download protection"
+            android:title="@string/unprotect_media_title"
             app:iconSpaceReserved="false"
-            app:key="@string/unprotect_media" />
+            app:key="@string/unprotect_media"
+            app:summary="@string/unprotect_media_summary" />
     </PreferenceCategory>
     <PreferenceCategory
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Mark followed users"
+        android:title="@string/mark_followed_users_title"
         app:iconSpaceReserved="false">
 
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="@bool/following_mark_def"
-            android:title="Enabled"
+            android:title="@string/following_mark_title"
             app:iconSpaceReserved="false"
-            app:key="@string/following_mark" />
+            app:key="@string/following_mark"
+            app:summary="@string/following_mark_summary" />
         <EditTextPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:defaultValue="@string/following_mark_prefix_def"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="Set mark prefix"
+            android:title="@string/following_mark_prefix_title"
             app:iconSpaceReserved="false"
             app:key="@string/following_mark_prefix"
             app:useSimpleSummaryProvider="true" />
