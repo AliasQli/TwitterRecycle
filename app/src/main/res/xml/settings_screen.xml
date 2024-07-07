@@ -14,22 +14,13 @@
             android:title="Pretend premium user"
             app:iconSpaceReserved="false"
             app:key="@string/pretend_premium" />
-        <EditTextPreference
+        <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:title="Open &quot;Extras&quot; menu"
+            android:defaultValue="@bool/enable_read_mode_def"
+            android:title="Enable &quot;Read mode&quot;"
             app:iconSpaceReserved="false"
-            app:key="@string/extras_menu_key" />
-        <EditTextPreference
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:title="Open &quot;Undo post&quot; menu"
-            app:iconSpaceReserved="false"
-            app:key="@string/undo_post_menu_key" />
+            app:key="@string/enable_read_mode" />
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,11 +28,27 @@
             android:title="Enable &quot;Undo post&quot;"
             app:iconSpaceReserved="false"
             app:key="@string/enable_undo_post" />
+        <EditTextPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Open &quot;Early access&quot; menu"
+            app:iconSpaceReserved="false"
+            app:key="@string/early_access_menu_key" />
+        <EditTextPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Open &quot;Custom Navigation&quot; menu"
+            app:iconSpaceReserved="false"
+            app:key="@string/custom_navigation_menu_key" />
     </PreferenceCategory>
     <PreferenceCategory
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Timeline settings"
+        android:title="Cleanup settings"
         app:iconSpaceReserved="false">
 
         <SwitchPreference
@@ -68,6 +75,13 @@
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:defaultValue="@bool/disable_recommended_users_def"
+            android:title="Disable recommended users"
+            app:iconSpaceReserved="false"
+            app:key="@string/disable_recommended_users" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:defaultValue="@bool/disable_pinned_tweets_def"
             android:title="Disable pinned tweets"
             app:iconSpaceReserved="false"
@@ -75,24 +89,24 @@
         <SwitchPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:defaultValue="@bool/disable_bookmarked_tweets_def"
+            android:title="Disable bookmarked tweets"
+            app:iconSpaceReserved="false"
+            app:key="@string/disable_bookmarked_tweets" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="@bool/disable_tweet_detail_related_tweets_def"
+            android:title="Disable tweet detail related tweets"
+            app:iconSpaceReserved="false"
+            app:key="@string/disable_tweet_detail_related_tweets" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:defaultValue="@bool/hide_new_tweets_banner_def"
             android:title="Hide &quot;new tweets&quot; banner"
             app:iconSpaceReserved="false"
             app:key="@string/hide_new_tweets_banner" />
-    </PreferenceCategory>
-    <PreferenceCategory
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:title="User profile settings"
-        app:iconSpaceReserved="false">
-
-        <SwitchPreference
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:defaultValue="@bool/disable_recommended_users_def"
-            android:title="Disable recommended users"
-            app:iconSpaceReserved="false"
-            app:key="@string/disable_recommended_users" />
     </PreferenceCategory>
     <PreferenceCategory
         android:layout_width="wrap_content"

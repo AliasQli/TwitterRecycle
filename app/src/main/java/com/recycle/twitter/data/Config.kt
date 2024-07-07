@@ -8,8 +8,8 @@ import com.recycle.twitter.R
 class Config(context: Context) {
     private val prefs = context.prefs().native()
 
-    val extrasMenuKey = context.getString(R.string.extras_menu_key)
-    val undoPostMenuKey = context.getString(R.string.undo_post_menu_key)
+    val customNavigationMenuKey = context.getString(R.string.custom_navigation_menu_key)
+    val earlyAccessMenuKey = context.getString(R.string.early_access_menu_key)
 
     private val itemPretendPremium = PrefsData(
         context.getString(R.string.pretend_premium),
@@ -34,6 +34,14 @@ class Config(context: Context) {
     private val itemDisablePinnedTweets = PrefsData(
         context.getString(R.string.disable_pinned_tweets),
         context.resources.getBoolean(R.bool.disable_pinned_tweets_def)
+    )
+    private val itemDisableBookmarkedTweets = PrefsData(
+        context.getString(R.string.disable_bookmarked_tweets),
+        context.resources.getBoolean(R.bool.disable_bookmarked_tweets_def)
+    )
+    private val itemTweetDetailRelatedTweets = PrefsData(
+        context.getString(R.string.disable_tweet_detail_related_tweets),
+        context.resources.getBoolean(R.bool.disable_tweet_detail_related_tweets_def)
     )
     private val itemHideNewTweetsBanner = PrefsData(
         context.getString(R.string.hide_new_tweets_banner),
@@ -69,6 +77,8 @@ class Config(context: Context) {
     val disablePromotedTweets by Cache(allCache) { prefs.get(itemDisablePromotedTweets) }
     val disableWhoToFollow by Cache(allCache) { prefs.get(itemDisableWhoToFollow) }
     val disablePinnedTweets by Cache(allCache) { prefs.get(itemDisablePinnedTweets) }
+    val disableBookmarkedTweets by Cache(allCache) { prefs.get(itemDisableBookmarkedTweets) }
+    val disableTweetDetailRelatedTweets by Cache(allCache) { prefs.get(itemTweetDetailRelatedTweets) }
     val hideNewTweetsBanner by Cache(allCache) { prefs.get(itemHideNewTweetsBanner) }
     val disableRecommendedUsers by Cache(allCache) { prefs.get(itemDisableRecommendedUsers) }
     val disableMediaWarning by Cache(allCache) { prefs.get(itemDisableMediaWarning) }

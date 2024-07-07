@@ -13,6 +13,8 @@ object JsonTimelineEntryHook : Hook() {
         if (entryId.startsWith("superhero-") && config.disablePromotedTweets) return true
         if (entryId.startsWith("who-to-follow-") && config.disableWhoToFollow) return true
         if (entryId.startsWith("pinned-tweets-") && config.disablePinnedTweets) return true
+        if (entryId.startsWith("bookmarked-tweet-") && config.disableBookmarkedTweets) return true
+        if (entryId.startsWith("tweetdetailrelatedtweets-") && config.disableTweetDetailRelatedTweets) return true
         return false
     }
 
@@ -39,6 +41,9 @@ object JsonTimelineEntryHook : Hook() {
                     }.get(result).setNull()
                     YLog.info("Removed timeline entry $entryId")
                 } else if (
+                // Filter some uninteresting entryId
+                    !entryId.startsWith("promoted-tweet-") &&
+                    !entryId.startsWith("cursor-") &&
                     !entryId.startsWith("tweet-") &&
                     !entryId.startsWith("Guide-") &&
                     !entryId.startsWith("conversationthread-") &&
@@ -46,7 +51,7 @@ object JsonTimelineEntryHook : Hook() {
                     !entryId.startsWith("community-to-join-") &&
                     !entryId.startsWith("cursor:")
                 ) {
-                    YLog.warn("entryId $entryId")
+                    YLog.debug("entryId $entryId")
                 }
             }
         }

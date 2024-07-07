@@ -26,7 +26,7 @@ class SettingsActivity : ModuleAppCompatActivity() {
         override fun onDisplayPreferenceDialog(preference: Preference) {
             val ctx = context ?: return
             when (preference.key) {
-                config.extrasMenuKey -> {
+                config.customNavigationMenuKey -> {
                     ctx.startActivity(
                         // Use class name because classloader doesn't work here
                         Intent()
@@ -41,13 +41,13 @@ class SettingsActivity : ModuleAppCompatActivity() {
 
                 }
 
-                config.undoPostMenuKey -> {
+                config.earlyAccessMenuKey -> {
                     ctx.startActivity(
                         Intent()
                             .setComponent(
                                 ComponentName(
                                     ctx,
-                                    "com.twitter.feature.subscriptions.settings.undotweet.UndoTweetSettingsActivity"
+                                    "com.twitter.feature.twitterblue.settings.tabcustomization.TabCustomizationActivity"
                                 )
                             )
                             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

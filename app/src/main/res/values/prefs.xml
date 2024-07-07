@@ -1,42 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="persistent_users_key">following_users</string>
-    <string name="extras_menu_key">extras_menu_key</string>
-    <string name="undo_post_menu_key">undo_post_menu_key</string>
+    <string name="persistent_users_key" translatable="false">following_users</string>
+    <string name="custom_navigation_menu_key" translatable="false">custom_navigation_menu_key</string>
+    <string name="early_access_menu_key" translatable="false">early_access_menu_key</string>
 
-    <string name="pretend_premium">pretend_premium</string>
+    <string name="pretend_premium" translatable="false">pretend_premium</string>
     <bool name="pretend_premium_def">true</bool>
 
-    <string name="enable_undo_post">enable_undo_post</string>
+    <string name="enable_read_mode" translatable="false">enable_read_mode</string>
+    <bool name="enable_read_mode_def">true</bool>
+
+    <string name="enable_undo_post" translatable="false">enable_undo_post</string>
     <bool name="enable_undo_post_def">false</bool>
 
-    <string name="block_retweets">block_retweets</string>
-    <bool name="block_retweets_def">true</bool>
+    <string name="block_retweets" translatable="false">block_retweets</string>
+    <bool name="block_retweets_def">false</bool>
 
-    <string name="disable_promoted_tweets">disable_promoted_tweets</string>
+    <string name="disable_promoted_tweets" translatable="false">disable_promoted_tweets</string>
     <bool name="disable_promoted_tweets_def">true</bool>
 
-    <string name="disable_who_to_follow">disable_who_to_follow</string>
-    <bool name="disable_who_to_follow_def">true</bool>
+    <string name="disable_who_to_follow" translatable="false">disable_who_to_follow</string>
+    <bool name="disable_who_to_follow_def">false</bool>
 
-    <string name="disable_pinned_tweets">disable_pinned_tweets</string>
-    <bool name="disable_pinned_tweets_def">true</bool>
+    <string name="disable_pinned_tweets" translatable="false">disable_pinned_tweets</string>
+    <bool name="disable_pinned_tweets_def">false</bool>
 
-    <string name="hide_new_tweets_banner">hide_new_tweets_banner</string>
+    <string name="disable_bookmarked_tweets" translatable="false">disable_bookmarked_tweets</string>
+    <bool name="disable_bookmarked_tweets_def">false</bool>
+
+    <string name="disable_tweet_detail_related_tweets" translatable="false">disable_tweet_detail_related_tweets</string>
+    <bool name="disable_tweet_detail_related_tweets_def">false</bool>
+
+    <string name="hide_new_tweets_banner" translatable="false">hide_new_tweets_banner</string>
     <bool name="hide_new_tweets_banner_def">false</bool>
 
-    <string name="disable_recommended_users">disable_recommended_users</string>
-    <bool name="disable_recommended_users_def">true</bool>
+    <string name="disable_recommended_users" translatable="false">disable_recommended_users</string>
+    <bool name="disable_recommended_users_def">false</bool>
 
-    <string name="disable_media_warning">disable_media_warning</string>
+    <string name="disable_media_warning" translatable="false">disable_media_warning</string>
     <bool name="disable_media_warning_def">true</bool>
 
-    <string name="unprotect_media">unprotect_media</string>
+    <string name="unprotect_media" translatable="false">unprotect_media</string>
     <bool name="unprotect_media_def">true</bool>
 
-    <string name="following_mark">following_mark</string>
-    <bool name="following_mark_def">true</bool>
+    <string name="following_mark" translatable="false">following_mark</string>
+    <bool name="following_mark_def">false</bool>
 
-    <string name="following_mark_prefix">following_mark_prefix</string>
-    <string name="following_mark_prefix_def">📎</string>
+    <string name="following_mark_prefix" translatable="false">following_mark_prefix</string>
+    <string name="following_mark_prefix_def" translatable="false">📎</string>
 </resources>
