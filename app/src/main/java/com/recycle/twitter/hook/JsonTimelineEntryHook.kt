@@ -44,6 +44,7 @@ object JsonTimelineEntryHook : Hook() {
                 // Filter some uninteresting entryId
                     !entryId.startsWith("promoted-tweet-") &&
                     !entryId.startsWith("cursor-") &&
+                    !entryId.startsWith("user-") &&
                     !entryId.startsWith("tweet-") &&
                     !entryId.startsWith("Guide-") &&
                     !entryId.startsWith("conversationthread-") &&

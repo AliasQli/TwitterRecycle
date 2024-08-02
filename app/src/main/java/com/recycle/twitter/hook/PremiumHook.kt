@@ -25,7 +25,6 @@ object PremiumHook : Hook() {
     private const val overallSubscription = "subscriptions_feature_1009"
     private const val video1080pSubscription = "subscriptions_feature_1011"
     private const val undoTweetSubscription = "subscriptions_feature_1003"
-    private const val customNavSubscription = "subscriptions_feature_1008"
     private const val readerModeSubscription = "subscriptions_feature_1005"
 
     override fun PackageParam.load() {
@@ -52,9 +51,9 @@ object PremiumHook : Hook() {
         }.hook {
             replaceAny {
                 when (args(0).cast<String>()!!) {
-                    overallSubscription, video1080pSubscription, customNavSubscription -> true
+                    overallSubscription, video1080pSubscription -> true
                     undoTweetSubscription -> config.enableUndoPost
-                    readerModeSubscription -> true // OK
+                    readerModeSubscription -> config.enableReaderMode
                     else -> false
                 } || callOriginal() as Boolean
             }

@@ -13,9 +13,6 @@
 
     <string name="open_early_access_menu_title">Open \"Early access\" menu (premium feature)</string>
 
-    <string name="open_extras_menu_title">Open \"Extras\" menu  (premium feature)</string>
-    <string name="open_extras_menu_symmary">Custom app icon is known not to work</string>
-
     <string name="cleanup_settings_title">Cleanup settings</string>
 
     <string name="block_retweets_title">Block retweets from followed users</string>

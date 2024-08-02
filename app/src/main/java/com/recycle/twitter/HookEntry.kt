@@ -48,7 +48,9 @@ object HookEntry : IYukiHookXposedInit {
                             injectModuleAppResources()
                             registerModuleAppActivities()
                             config = Config(this)
-                            Hook.init(baseContext)
+                            System.loadLibrary("dexkit")
+                            val dexKit = DexKitBridge.create(this@loadApp.appInfo.sourceDir)
+                            Hook.init(baseContext, dexKit)
 
                             val hooks = arrayListOf(
                                 JsonApiTweetHook,

@@ -39,15 +39,6 @@
             android:title="@string/open_early_access_menu_title"
             app:iconSpaceReserved="false"
             app:key="@string/early_access_menu_key" />
-        <EditTextPreference
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:title="@string/open_extras_menu_title"
-            app:iconSpaceReserved="false"
-            app:key="@string/extras_menu_key"
-            app:summary="@string/open_extras_menu_symmary" />
     </PreferenceCategory>
     <PreferenceCategory
         android:layout_width="wrap_content"

@@ -15,6 +15,10 @@ class Config(context: Context) {
         context.getString(R.string.pretend_premium),
         context.resources.getBoolean(R.bool.pretend_premium_def)
     )
+    private val itemEnableReaderMode = PrefsData(
+        context.getString(R.string.enable_undo_post),
+        context.resources.getBoolean(R.bool.enable_undo_post_def)
+    )
     private val itemEnableUndoPost = PrefsData(
         context.getString(R.string.enable_undo_post),
         context.resources.getBoolean(R.bool.enable_undo_post_def)
@@ -72,6 +76,7 @@ class Config(context: Context) {
     fun refresh() = allCache.forEach(Cache<*>::refresh)
 
     val pretendPremium by Cache(allCache) { prefs.get(itemPretendPremium) }
+    val enableReaderMode by Cache(allCache) { prefs.get(itemEnableReaderMode) }
     val enableUndoPost by Cache(allCache) { prefs.get(itemEnableUndoPost) }
     val blockRetweets by Cache(allCache) { prefs.get(itemBlockRetweets) }
     val disablePromotedTweets by Cache(allCache) { prefs.get(itemDisablePromotedTweets) }
