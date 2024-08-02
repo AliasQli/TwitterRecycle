@@ -4,6 +4,7 @@
     <string name="premium_settings_title">Premium settings</string>
 
     <string name="pretend_premium_user_title">Pretend premium user</string>
+    <string name="pretend_premium_user_summary">Enable some local features. At least you can download videos</string>
 
     <string name="enable_read_mode_title">Enable \"Read Mode\"</string>
     <string name="enable_read_mode_summary">Read mode icon will appear on the top right corner of long tweets</string>
@@ -45,11 +46,15 @@
     <string name="unprotect_media_title">Disable media download protection</string>
     <string name="unprotect_media_summary">Allow downloading all media (still need to be premium to download videos)</string>
 
+    <string name="use_minimum_bitrate_title">Use minimum bitrate</string>
+    <string name="use_minimum_bitrate_summary">Select media streams from m3u8 playlists with a bitrate no smaller than the value set below, otherwise the stream with the highest bitrate is taken. There are often 3 media streams in a playlist, and a typical value for their bitrate is 256000, 832000 and 2176000</string>
+
+    <string name="minimum_bitrate_title">Minimum bitrate</string>
+
     <string name="mark_followed_users_title">Mark followed users</string>
 
     <string name="following_mark_title">Enabled</string>
-    <string name="following_mark_summary">If enabled, the prefix below will be prepended to their username if followed</string>
+    <string name="following_mark_summary">If enabled, the prefix set below will be prepended to their username if followed</string>
 
     <string name="following_mark_prefix_title">Mark with prefix</string>
-    <string name="pretend_premium_user_summary">Enable some local features. At least you can download videos</string>
 </resources>

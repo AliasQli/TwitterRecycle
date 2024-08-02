@@ -131,6 +131,22 @@
             app:iconSpaceReserved="false"
             app:key="@string/unprotect_media"
             app:summary="@string/unprotect_media_summary" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="@bool/use_minimum_bitrate_def"
+            android:title="@string/use_minimum_bitrate_title"
+            app:iconSpaceReserved="false"
+            app:key="@string/use_minimum_bitrate"
+            app:summary="@string/use_minimum_bitrate_summary" />
+        <EditTextPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="@string/minimum_bitrate_def"
+            android:title="@string/minimum_bitrate_title"
+            app:iconSpaceReserved="false"
+            app:key="@string/minimum_bitrate"
+            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
     <PreferenceCategory
         android:layout_width="wrap_content"

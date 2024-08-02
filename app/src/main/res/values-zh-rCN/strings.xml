@@ -25,10 +25,13 @@
     <string name="unprotect_media_summary">允许下载所有媒体（仍需要 Premium 以下载视频）</string>
     <string name="mark_followed_users_title">标记关注用户</string>
     <string name="following_mark_title">启用</string>
-    <string name="following_mark_summary">若启用，下面的前缀会被置于所有关注用户的用户名前</string>
+    <string name="following_mark_summary">若启用，下方设置的前缀会被置于所有关注用户的用户名前</string>
     <string name="following_mark_prefix_title">标记前缀</string>
     <string name="pretend_premium_user_summary">启用一些本地功能，至少可以下载视频</string>
     <string name="enable_read_mode_title">启用“阅读模式”</string>
     <string name="enable_read_mode_summary">阅读模式图标会显示在长推右上角</string>
     <string name="enable_undo_post_title">启用“撤销帖子”</string>
+    <string name="minimum_bitrate_title">最小比特率</string>
+    <string name="use_minimum_bitrate_summary">从 m3u8 播放列表中选择比特率不小于下方设置值的媒体流，或者选择比特率最高的媒体流。一个播放列表中通常有 3 个媒体流，它们一个典型的比特率分别为 256000、832000 和 2176000</string>
+    <string name="use_minimum_bitrate_title">使用最小比特率</string>
 </resources>

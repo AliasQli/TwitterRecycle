@@ -7,6 +7,7 @@ import com.highcapable.yukihookapi.hook.factory.registerModuleAppActivities
 import com.highcapable.yukihookapi.hook.xposed.proxy.IYukiHookXposedInit
 import com.recycle.twitter.data.Config
 import com.recycle.twitter.data.config
+import com.recycle.twitter.hook.AdaptiveTrackSelectionHook
 import com.recycle.twitter.hook.BannerHook
 import com.recycle.twitter.hook.Hook
 import com.recycle.twitter.hook.JsonApiTweetHook
@@ -18,6 +19,7 @@ import com.recycle.twitter.hook.PremiumHook
 import com.recycle.twitter.hook.ProtectedMediaHook
 import com.recycle.twitter.hook.SensitiveMediaHook
 import com.recycle.twitter.hook.SettingsHook
+import org.luckypray.dexkit.DexKitBridge
 
 @InjectYukiHookWithXposed
 object HookEntry : IYukiHookXposedInit {
@@ -63,6 +65,7 @@ object HookEntry : IYukiHookXposedInit {
                                 PremiumHook,
                                 BannerHook,
                                 SettingsHook,
+                                AdaptiveTrackSelectionHook,
                             )
 
                             hooks.forEach { hook ->

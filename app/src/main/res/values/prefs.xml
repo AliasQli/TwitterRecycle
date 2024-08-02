@@ -43,6 +43,12 @@
     <string name="unprotect_media" translatable="false">unprotect_media</string>
     <bool name="unprotect_media_def">true</bool>
 
+    <string name="use_minimum_bitrate" translatable="false">use_minimum_bitrate</string>
+    <bool name="use_minimum_bitrate_def">false</bool>
+
+    <string name="minimum_bitrate" translatable="false">minimum_bitrate</string>
+    <string name="minimum_bitrate_def" translatable="false">1000000</string>
+
     <string name="following_mark" translatable="false">following_mark</string>
     <bool name="following_mark_def">false</bool>
 

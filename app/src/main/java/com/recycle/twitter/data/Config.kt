@@ -63,6 +63,14 @@ class Config(context: Context) {
         context.getString(R.string.unprotect_media),
         context.resources.getBoolean(R.bool.unprotect_media_def)
     )
+    private val itemUseMinimumBitrate = PrefsData(
+        context.getString(R.string.use_minimum_bitrate),
+        context.resources.getBoolean(R.bool.use_minimum_bitrate_def)
+    )
+    private val itemMinimumBitrate = PrefsData(
+        context.getString(R.string.minimum_bitrate),
+        context.getString(R.string.minimum_bitrate_def)
+    )
     private val itemFollowingMark = PrefsData(
         context.getString(R.string.following_mark),
         context.resources.getBoolean(R.bool.following_mark_def)
@@ -88,6 +96,14 @@ class Config(context: Context) {
     val disableRecommendedUsers by Cache(allCache) { prefs.get(itemDisableRecommendedUsers) }
     val disableMediaWarning by Cache(allCache) { prefs.get(itemDisableMediaWarning) }
     val unprotectMedia by Cache(allCache) { prefs.get(itemUnprotectMedia) }
+    val useMinimumBitrate by Cache(allCache) { prefs.get(itemUseMinimumBitrate) }
+    val minimumBitrate by Cache(allCache) {
+        try {
+            prefs.get(itemMinimumBitrate).toInt()
+        } catch (_: NumberFormatException) {
+            context.getString(R.string.minimum_bitrate_def).toInt()
+        }
+    }
     val followingMark by Cache(allCache) { prefs.get(itemFollowingMark) }
     val followingMarkPrefix by Cache(allCache) { prefs.get(itemFollowingMarkPrefix) }
 }
