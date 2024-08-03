@@ -20,7 +20,7 @@ object AdaptiveTrackSelectionHook : Hook() {
             returnType(IntType)
         }.hook {
             after {
-                if (!config.useMinimumBitrate) return@after
+                if (!config.useMinimumBitrate || config.minimumBitrate == null) return@after
 
                 val getBitrate = { i: Int ->
                     val format = adaptiveTrackSelectionClass.method {
@@ -35,7 +35,7 @@ object AdaptiveTrackSelectionHook : Hook() {
                 var i = result as Int
                 while (i >= 0) {
                     val b = getBitrate(i)
-                    if (b >= config.minimumBitrate) {
+                    if (b >= config.minimumBitrate!!) {
                         result = i
                         return@after
                     }

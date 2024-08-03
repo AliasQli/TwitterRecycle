@@ -2,7 +2,8 @@
     <string name="premium_settings_title">Premium 设置</string>
     <string name="pretend_premium_user_title">假装 Premium 用户</string>
     <string name="enable_undo_post_summary">延迟发送推文。其设置在“抢先体验”中</string>
-    <string name="open_early_access_menu_title">打开“抢先体验”菜单（Premium 功能）</string>
+    <string name="open_undo_tweet_menu_title">打开“撤销帖子”菜单（Premium 功能）</string>
+    <string name="open_video_1080p_menu_title">打开“数据用量”菜单（Premium 功能）</string>
     <string name="cleanup_settings_title">清理设置</string>
     <string name="block_retweets_title">屏蔽关注用户的转推</string>
     <string name="block_retweets_summary">屏蔽原是发送者已被关注的转推</string>

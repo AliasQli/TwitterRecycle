@@ -8,8 +8,8 @@ import com.recycle.twitter.R
 class Config(context: Context) {
     private val prefs = context.prefs().native()
 
-    val extrasMenuKey = context.getString(R.string.extras_menu_key)
-    val earlyAccessMenuKey = context.getString(R.string.early_access_menu_key)
+    val undoTweetMenuKey = context.getString(R.string.undo_tweet_menu_key)
+    val video1080pMenuKey = context.getString(R.string.video_1080p_menu_key)
 
     private val itemPretendPremium = PrefsData(
         context.getString(R.string.pretend_premium),
@@ -101,7 +101,7 @@ class Config(context: Context) {
         try {
             prefs.get(itemMinimumBitrate).toInt()
         } catch (_: NumberFormatException) {
-            context.getString(R.string.minimum_bitrate_def).toInt()
+            null
         }
     }
     val followingMark by Cache(allCache) { prefs.get(itemFollowingMark) }

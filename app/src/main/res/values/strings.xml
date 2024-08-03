@@ -10,9 +10,10 @@
     <string name="enable_read_mode_summary">Read mode icon will appear on the top right corner of long tweets</string>
 
     <string name="enable_undo_post_title">Enable \"Undo post\"</string>
-    <string name="enable_undo_post_summary">Defer sending a tweet. Its settings is in \"Early access\"</string>
+    <string name="enable_undo_post_summary">Defer sending a tweet. Below is its settings</string>
 
-    <string name="open_early_access_menu_title">Open \"Early access\" menu (premium feature)</string>
+    <string name="open_undo_tweet_menu_title">Open \"Undo post\" menu (premium feature)</string>
+    <string name="open_video_1080p_menu_title">Open \"Data usage\" menu (premium feature)</string>
 
     <string name="cleanup_settings_title">Cleanup settings</string>
 

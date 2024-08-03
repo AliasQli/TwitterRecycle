@@ -36,9 +36,17 @@
             android:layout_height="wrap_content"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="@string/open_early_access_menu_title"
+            android:title="@string/open_undo_tweet_menu_title"
             app:iconSpaceReserved="false"
-            app:key="@string/early_access_menu_key" />
+            app:key="@string/undo_tweet_menu_key" />
+        <EditTextPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/open_video_1080p_menu_title"
+            app:iconSpaceReserved="false"
+            app:key="@string/video_1080p_menu_key" />
     </PreferenceCategory>
     <PreferenceCategory
         android:layout_width="wrap_content"
@@ -145,8 +153,7 @@
             android:defaultValue="@string/minimum_bitrate_def"
             android:title="@string/minimum_bitrate_title"
             app:iconSpaceReserved="false"
-            app:key="@string/minimum_bitrate"
-            app:useSimpleSummaryProvider="true" />
+            app:key="@string/minimum_bitrate" />
     </PreferenceCategory>
     <PreferenceCategory
         android:layout_width="wrap_content"

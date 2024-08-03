@@ -1,15 +1,18 @@
 package com.recycle.twitter.ui
 
-import android.content.ComponentName
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import androidx.preference.EditTextPreference
 import androidx.preference.Preference
+import androidx.preference.Preference.SummaryProvider
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.highcapable.yukihookapi.hook.xposed.parasitic.activity.base.ModuleAppCompatActivity
 import com.recycle.twitter.R
 import com.recycle.twitter.data.config
+import com.recycle.twitter.hook.SettingsHook
+
 
 class SettingsActivity : ModuleAppCompatActivity() {
     override val moduleTheme: Int
@@ -21,36 +24,36 @@ class SettingsActivity : ModuleAppCompatActivity() {
             PreferenceManager.getDefaultSharedPreferences(requireActivity())
                 .registerOnSharedPreferenceChangeListener(this)
             setPreferencesFromResource(R.xml.settings_screen, rootKey)
+
+            val minimumBitratePreference =
+                preferenceManager.findPreference<Preference>(requireContext().getString(R.string.minimum_bitrate)) as EditTextPreference
+            minimumBitratePreference.summaryProvider = SummaryProvider<Preference> {
+                if (config.minimumBitrate != null) {
+                    config.minimumBitrate.toString()
+                } else {
+                    "Error: Can't parse string \"${minimumBitratePreference.text}\""
+                }
+            }
         }
 
         override fun onDisplayPreferenceDialog(preference: Preference) {
             val ctx = context ?: return
             when (preference.key) {
-                config.extrasMenuKey -> {
+                config.undoTweetMenuKey -> {
                     ctx.startActivity(
-                        // Use class name because classloader doesn't work here
-                        Intent()
-                            .setComponent(
-                                ComponentName(
-                                    ctx,
-                                    "com.twitter.feature.subscriptions.settings.extras.ExtrasSettingsActivity"
-                                )
-                            )
-                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        Intent(
+                            ctx,
+                            SettingsHook.undoTweetSettingsActivityClass
+                        ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     )
-
                 }
 
-                config.earlyAccessMenuKey -> {
+                config.video1080pMenuKey -> {
                     ctx.startActivity(
-                        Intent()
-                            .setComponent(
-                                ComponentName(
-                                    ctx,
-                                    "com.twitter.feature.subscriptions.settings.earlyaccess.EarlyAccessSettingsActivity"
-                                )
-                            )
-                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        Intent(
+                            ctx,
+                            SettingsHook.dataSettingsActivityClass
+                        ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     )
                 }
 
