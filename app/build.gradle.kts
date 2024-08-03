@@ -12,8 +12,14 @@ android {
         applicationId = "com.recycle.twitter"
         minSdk = 27
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        // 1.2.3 translates to 1_002_003_0. The last digit is reserved.
+        // Note that versionCode <= 210_000_000_0
+        versionCode = 1_000_000_00
+        // Versioning strategy: In a.b.c,
+        // a is for breaking change,
+        // b is for new feature or change,
+        // c is for bug fix
+        versionName = "1.0.0"
     }
 
     buildFeatures {
